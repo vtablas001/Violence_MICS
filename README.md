@@ -9,6 +9,8 @@ cuadros y seis anexos. Su fecha de referencia es **noviembre de 2021** y
 articula MICS con el análisis multidimensional de Infosegura. Se conserva el
 [borrador inicial en Markdown](paper/manuscrito_noviembre_2019.md).
 
+El máximo autorizado es **27 páginas**, incluidas referencias y anexos.
+
 Los gráficos empíricos del artículo LaTeX presentan cifras **secundarias del
 informe MICS y de la presentación Infosegura**, cotejadas con sus tablas,
 páginas o diapositivas. No son reestimaciones

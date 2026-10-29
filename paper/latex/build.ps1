@@ -10,7 +10,7 @@ try {
     $pageMatch = [regex]::Match($paperLog, 'Output written on main\.pdf\s+\((\d+) pages?')
     if (-not $pageMatch.Success) { throw 'No se pudo comprobar la paginacion.' }
     $paperPages = [int]$pageMatch.Groups[1].Value
-    if ($paperPages -gt 25) { throw "El articulo tiene $paperPages paginas; el maximo es 25." }
+    if ($paperPages -gt 27) { throw "El articulo tiene $paperPages paginas; el maximo es 27." }
     Write-Output "Compilacion verificada: $paperPages paginas, incluidas referencias y anexos."
 } finally {
     Pop-Location

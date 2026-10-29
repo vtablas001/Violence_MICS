@@ -5,7 +5,7 @@ from pypdf import PdfReader
 
 parser = argparse.ArgumentParser()
 parser.add_argument("pdf", type=Path)
-parser.add_argument("--max-pages", type=int, default=25)
+parser.add_argument("--max-pages", type=int, default=27)
 args = parser.parse_args()
 reader = PdfReader(args.pdf)
 pages = len(reader.pages)

@@ -67,7 +67,7 @@ pdflatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
 En PowerShell, `./build.ps1` ejecuta las tres pasadas y comprueba el máximo
-de 25 páginas a partir del registro del compilador. Como verificación
+de 27 páginas a partir del registro del compilador. Como verificación
 independiente del archivo PDF:
 
 ```sh
@@ -75,7 +75,7 @@ python -m pip install pypdf
 python check_pdf.py main.pdf
 ```
 
-El límite de **25 páginas incluye título, resumen, referencias, gráficos,
+El límite de **27 páginas incluye título, resumen, referencias, gráficos,
 tabulados y anexos**. Al editar el contenido debe repetirse la comprobación.
 Los paquetes de TeX se instalan mediante la distribución del usuario si faltan.
 
@@ -85,7 +85,7 @@ El PDF entregado tiene **20 páginas**, incluidas las referencias y los seis
 anexos. Se compiló con pdfLaTeX (MiKTeX 26.2) y también con el compilador del
 editor de Codex. Se comprobaron referencias cruzadas, ausencia de cajas
 desbordadas en el registro y la representación de todas las páginas. La
-verificación independiente con `pypdf` confirmó el máximo de 25 páginas y la
+verificación independiente con `pypdf` confirmó el máximo de 27 páginas y la
 ausencia de la nota introductoria eliminada. Fecha de revisión: 29-10-2026.
 
 Los porcentajes usan punto decimal en CSV por compatibilidad de lectura y
