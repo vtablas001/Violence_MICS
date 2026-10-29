@@ -1,0 +1,17 @@
+# Microdatos y resultados locales: nunca publicar registros individuales.
+data/raw/*
+!data/raw/.gitkeep
+results/*
+!results/.gitkeep
+renv/library/
+renv/staging/
+.Rhistory
+.RData
+.Rproj.user/
+*.sav
+*.zsav
+*.dta
+*.rds
+*.Rout
+*.log
+
