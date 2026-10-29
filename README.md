@@ -2,7 +2,15 @@
 
 Análisis **descriptivo**, reproducible en R, de disciplina infantil, actitudes
 hacia la violencia contra la esposa y primera unión antes de los 15 y 18 años.
-Incluye un [manuscrito académico en español](paper/manuscrito_noviembre_2019.md).
+La versión principal del artículo está disponible como
+[PDF de 15 páginas](paper/latex/main.pdf) y como
+[proyecto LaTeX editable](paper/latex/README.md), con cinco figuras, once
+cuadros y cinco anexos. Se conserva el
+[borrador inicial en Markdown](paper/manuscrito_noviembre_2019.md).
+
+Los gráficos empíricos del artículo LaTeX presentan cifras **secundarias del
+informe oficial**, cotejadas con sus tablas y páginas. No son reestimaciones
+propias. El gráfico de sensibilidad es una ilustración matemática identificada.
 
 **Estado:** código probado con archivos SPSS artificiales. No se dispuso de los
 microdatos reales en esta entrega y no se calcularon prevalencias de El Salvador.

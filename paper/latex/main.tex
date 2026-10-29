@@ -1,0 +1,841 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.5cm,headheight=15pt]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx,longtable,array}
+\usepackage{graphicx,xcolor}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{caption}
+\usepackage{placeins}
+\usepackage{enumitem}
+\usepackage[round,authoryear]{natbib}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=teal,
+ pdftitle={Violencia familiar en El Salvador: ENS MICS 2014},
+ pdfauthor={Borrador para discusión académica}}
+\definecolor{petroleo}{HTML}{146475}
+\definecolor{gris}{HTML}{52606B}
+\definecolor{ocre}{HTML}{B47530}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\var}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\fuente}[1]{\par\vspace{3pt}{\footnotesize\textit{Fuente y alcance:} #1\par}}
+\newcommand{\pendiente}{\textit{Pendiente}}
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{3pt}
+\renewcommand{\arraystretch}{1.18}
+\captionsetup{font=small,labelfont=bf,skip=7pt}
+\setlist{nosep,leftmargin=*}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small ENS MICS El Salvador 2014}
+\fancyhead[R]{\small Violencia y protección}
+\fancyfoot[C]{\small \thepage\ de \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\emergencystretch=2em
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{16pt plus 2pt minus 2pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+\title{\vspace{-1.2cm}\textbf{Medir la violencia en el ámbito familiar en El Salvador}\\[0.4em]
+\large Disciplina infantil, actitudes hacia la violencia contra la esposa\\ y uniones tempranas en la ENS MICS 2014}
+\author{Borrador para discusión académica}
+\date{Noviembre de 2019\\[0.4em]\small Edición retrospectiva; preparación: 29 de octubre de 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\begin{abstract}
+El estudio de la violencia familiar exige distinguir prácticas, actitudes y
+trayectorias biográficas. Este artículo examina la Encuesta Nacional de Salud
+de Indicadores Múltiples por Conglomerados de El Salvador de 2014 y propone un
+protocolo reproducible para analizar disciplina infantil, justificación
+de la violencia contra la esposa y primera unión antes de los 15 y 18 años.
+Se combinan una auditoría del instrumento, una lectura de tabulados oficiales
+y una estrategia de estimación que considera selección intrahogar, ponderadores,
+estratos, conglomerados y datos desconocidos. Los cuadros publicados informan
+52,0\,\% de disciplina violenta en niños de 1 a 14 años, 7,7\,\% de justificación
+en alguno de cinco escenarios entre mujeres de 15 a 49 años y 25,5\,\% de primera
+unión antes de los 18 entre mujeres de 20 a 24 años. Son cifras secundarias del
+informe oficial, no una reestimación propia. El programa en R se verificó con
+archivos artificiales; la ejecución con microdatos autorizados y los intervalos
+propios permanecen pendientes. La contribución consiste en precisar unidades,
+denominadores y reglas de construcción, sin atribuir a estos indicadores
+alcance causal ni cobertura exhaustiva de la violencia familiar.
+\end{abstract}
+\noindent\textbf{Palabras clave:} violencia familiar; disciplina infantil;
+normas de género; unión temprana; encuestas complejas; El Salvador.
+
+\section{Introducción}
+La violencia en el hogar es un problema de derechos y de medición. Los hechos
+conocidos por instituciones no coinciden necesariamente con las experiencias
+que una encuesta puede captar. El registro administrativo depende de la
+denuncia, el acceso a servicios y las prácticas de documentación; una encuesta
+depende de su población cubierta, sus preguntas, su informante y la disposición
+a responder. Ninguna fuente representa por sí sola el universo del fenómeno.
+
+En este contexto, la Encuesta Nacional de Salud de Indicadores Múltiples por
+Conglomerados de 2014, en adelante ENS MICS, permite estudiar tres dimensiones
+relacionadas: las prácticas disciplinarias dirigidas a un niño seleccionado,
+las opiniones de las mujeres frente a situaciones de violencia contra la esposa
+y la edad de inicio de la primera unión. Su valor analítico depende de mantener
+claras sus diferencias conceptuales y temporales.
+
+El objetivo es construir una estrategia descriptiva verificable. Se pregunta:
+¿qué mide cada módulo?, ¿quién integra sus denominadores?, ¿cómo se incorpora la
+selección muestral? y ¿qué conclusiones pueden sostenerse a partir de los
+tabulados publicados? Estas preguntas anteceden a cualquier explicación causal.
+Una regla incorrecta de codificación puede alterar la interpretación de un
+porcentaje incluso si el procedimiento estadístico posterior es sofisticado.
+
+El artículo aporta una correspondencia explícita entre preguntas, variables e
+indicadores; una selección de cifras oficiales de referencia; un protocolo en
+R con controles de integridad; y anexos para replicación. La sección de
+resultados distingue evidencia secundaria publicada de estimaciones propias
+todavía no calculadas. No se utiliza la información artificial de las pruebas
+como evidencia sobre la población salvadoreña.
+
+\section{Contexto y marco conceptual}
+\subsection{Violencia, protección y política pública}
+El informe nacional incorpora disciplina, actitudes y matrimonio temprano
+dentro de su análisis de protección a la infancia. Estos módulos amplían el
+diagnóstico de salud y condiciones de vida hacia relaciones de poder,
+socialización y ejercicio de derechos \citep{ens}. Sin embargo, su cobertura no
+equivale a la de una encuesta especializada en todas las formas de violencia.
+No ofrece una medición integral de homicidios, violencia de pandillas, abuso
+sexual o coerción de pareja.
+
+El marco INSPIRE de la Organización Mundial de la Salud y sus asociados
+identifica ámbitos complementarios de prevención, entre ellos normas sociales,
+apoyo a cuidadores, entornos seguros, fortalecimiento económico y servicios de
+respuesta \citep{inspire}. Este enfoque respalda examinar prácticas y actitudes
+en conjunto, pero no justifica asumir que una respuesta normativa cause un
+comportamiento individual ni que una intervención específica explique un
+porcentaje transversal.
+
+En El Salvador, las reformas sobre matrimonio infantil reconocidas por agencias
+de Naciones Unidas en agosto de 2017 constituyen un antecedente relevante para
+la discusión disponible a noviembre de 2019 \citep{onu2017}. La ENS MICS fue
+levantada antes de esa reforma. Sus datos de 2014 pueden funcionar como
+referencia previa, pero no permiten estimar el impacto de un cambio legal
+posterior. Además, una unión de convivencia y un matrimonio formal son
+circunstancias que el cuestionario considera dentro de una trayectoria común;
+sus mecanismos sociales y jurídicos no son idénticos.
+
+\subsection{Tres dimensiones que no deben confundirse}
+La disciplina violenta constituye una experiencia reportada por un adulto
+acerca de un niño durante el mes anterior. La justificación de la violencia
+es una opinión declarada frente a situaciones hipotéticas. La unión temprana
+es un evento retrospectivo de inicio de convivencia conyugal. Estos constructos
+pueden relacionarse, pero tienen unidades, ventanas temporales y procesos de
+medición diferentes.
+
+Por ello no se suman en un índice único de violencia. Una escala conjunta
+exigiría justificar ponderaciones, dirección de los componentes y comparabilidad,
+además de validar su estructura. Tampoco se denomina a las preguntas de actitudes
+una escala validada de machismo estructural. El término \emph{instrumento} se
+refiere aquí al cuestionario de encuesta, no a una variable instrumental
+econométrica.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Dimensiones, unidades y alcance interpretativo}\label{tab:dimensiones}
+\begin{tabularx}{\textwidth}{@{}p{2.6cm}YYY@{}}\toprule
+Dimensión & Unidad y período & Indicador principal & Lo que no identifica por sí sola\\\midrule
+Disciplina & Niño seleccionado de 1 a 14 años; último mes & Algún acto físico o psicológico & Toda violencia sufrida a lo largo de la vida\\
+Actitudes & Mujer de 15 a 49 años; opinión al entrevistar & Justificación en alguno de cinco escenarios & Victimización o conducta efectiva del esposo\\
+Primera unión & Mujer de 20 a 24 años; historia retrospectiva & Inicio antes de los 15 y de los 18 años & Incidencia anual o efecto causal de una reforma\\\bottomrule
+\end{tabularx}
+\fuente{Construcción analítica a partir del cuestionario ENS MICS. Los tres universos no se combinan como si fueran una sola muestra de individuos.}
+\end{table}
+
+\section{Fuente, diseño e instrumento}
+\subsection{Organización de la encuesta}
+La ENS MICS fue realizada por el Ministerio de Salud y el Instituto Nacional
+de Salud, con colaboración de DIGESTYC y asistencia técnica de UNICEF.
+El informe documenta un diseño multietápico por conglomerados, estratificado
+por área urbana y rural dentro de los departamentos \citep{ens}. La biblioteca
+de microdatos identifica la encuesta con la referencia
+\var{SLV_2014_MICS_v01_M} \citep{catalogo}.
+
+Para este estudio se utilizan conceptualmente tres archivos SPSS:
+\var{hh.sav}, de hogares; \var{hl.sav}, del listado de miembros; y
+\var{wm.sav}, de mujeres. El archivo de menores de cinco años no sustituye al
+de disciplina infantil. Las llaves del hogar combinan \var{HH1} y \var{HH2};
+la línea del miembro o de la mujer identifica a la persona dentro de ese hogar.
+Antes de unir archivos se exige unicidad de estas llaves y se comprueba que
+la vinculación no multiplique registros.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=0.75cm and 0.8cm,
+ box/.style={draw=petroleo,rounded corners=2pt,align=center,text width=4.7cm,
+ minimum height=1.05cm,font=\small},arr/.style={-{Stealth[length=2mm]},thick,draw=gris}]
+\node[box] (hh) {\textbf{Hogares: hh.sav}\\Diseño, riqueza, área y selección SL};
+\node[box,right=of hh] (wm) {\textbf{Mujeres: wm.sav}\\Actitudes y trayectoria de unión};
+\node[box,below=of hh] (hl) {\textbf{Miembros: hl.sav}\\Línea, edad y sexo del niño};
+\node[box,below=of hl] (child) {\textbf{Dominio infantil 1-14}\\Peso del hogar $\times$ SL1};
+\node[box,below=2.55cm of wm] (women) {\textbf{Mujeres 15-49 / cohorte 20-24}\\Ponderador individual wmweight};
+\draw[arr] (hh)--(hl);
+\draw[arr] (hl)--(child);
+\draw[arr] (hh)--(wm) node[midway,above,font=\scriptsize] {HH1, HH2};
+\draw[arr] (wm)--(women);
+\end{tikzpicture}
+\caption{Arquitectura de los archivos y de los dominios analíticos}\label{fig:flujo}
+\fuente{Esquema del protocolo propuesto. Compartir hogar no basta para atribuir maternidad ni para vincular automáticamente la actitud de una mujer con la disciplina de un niño.}
+\end{figure}
+
+\subsection{Selección del niño y disciplina}
+El módulo de selección identifica un niño entre los miembros de 1 a 17 años.
+\var{SL1} cuenta ese conjunto; \var{SL9B} y \var{SL9C} registran línea y edad
+del seleccionado. El módulo de disciplina se aplica si tiene de 1 a 14 años;
+\var{CD2} conserva su línea. La nota 5 de la página impresa 306 del informe
+prescribe ajustar el peso del hogar por el número de niños de 1 a 17 años.
+Este detalle es decisivo: el rango usado para seleccionar es más amplio que
+el rango al que se aplica el indicador.
+
+Las preguntas \var{CD3A}-\var{CD3K} describen prácticas usadas por la persona
+informante u otros miembros del hogar. Sus respuestas sustantivas son uno
+para sí y dos para no. La agresión psicológica comprende gritos e insultos.
+La física incluye sacudidas, nalgadas y los distintos golpes descritos.
+El subgrupo severo considera golpes en cara, cabeza u orejas y palizas fuertes
+y repetidas. Golpear con un objeto, por sí solo, no se asigna automáticamente
+a ese subgrupo; esto no minimiza la gravedad del acto.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Correspondencia de los ítems de disciplina}\label{tab:cd}
+\begin{tabularx}{\textwidth}{@{}p{2.2cm}Yp{4.7cm}@{}}\toprule
+Ítem & Contenido resumido & Clasificación operacional\\\midrule
+CD3A, B, E & Quitar privilegios, explicar conducta y dar otra actividad & Métodos no violentos\\
+CD3D, H & Gritar e insultar & Agresión psicológica\\
+CD3C, F & Sacudir y dar nalgada con mano & Castigo físico\\
+CD3G, J & Golpear con objeto; golpear mano, brazo o pierna & Castigo físico\\
+CD3I, K & Golpear cara, cabeza u orejas; paliza repetida y fuerte & Castigo físico severo\\\bottomrule
+\end{tabularx}
+\fuente{Cuestionario, apéndice F, p. 474. El castigo severo es parte del físico total. Los grupos psicológico y físico pueden solaparse.}
+\end{table}
+
+Debe distinguirse el uso de \emph{algún} método no violento de \emph{solo}
+disciplina no violenta. La segunda categoría exige al menos un acto A, B o E
+y ausencia identificada de todos los actos violentos. Un hogar puede explicar
+una conducta y también golpear: en ese caso hay algún método no violento,
+pero no una práctica exclusivamente no violenta. La pregunta \var{CD4}, sobre
+la necesidad de castigar físicamente, es una actitud y no se añade al indicador
+de experiencia del niño.
+
+\subsection{Diez escenarios de actitudes}
+El cuestionario salvadoreño incluye diez situaciones \var{DV1A}-\var{DV1J},
+con códigos uno para sí, dos para no y ocho para no sabe. Las cinco primeras
+forman el compuesto comparable más habitual; las cinco adicionales amplían
+la cobertura nacional. El universo abarca mujeres entrevistadas de 15 a 49
+años, independientemente de su estado conyugal.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Escenarios de justificación de violencia contra la esposa}\label{tab:dvitems}
+\begin{tabularx}{\textwidth}{@{}p{1.4cm}Yp{3.9cm}@{}}\toprule
+Ítem & Situación planteada & Compuesto al que pertenece\\\midrule
+DV1A & Salir sin avisarle al esposo & Cinco y diez\\
+DV1B & Descuidar a los niños & Cinco y diez\\
+DV1C & Discutir con el esposo & Cinco y diez\\
+DV1D & Negarse a mantener relaciones sexuales & Cinco y diez\\
+DV1E & Quemar la comida & Cinco y diez\\
+DV1F & Hablar con otro hombre & Diez\\
+DV1G & Salir mucho con amistades & Diez\\
+DV1H & Hablar mucho con familiares & Diez\\
+DV1I & No compartir sus ingresos & Diez\\
+DV1J & Tocar las pertenencias del esposo & Diez\\\bottomrule
+\end{tabularx}
+\fuente{Cuestionario nacional, apéndice F, p. 507. Las descripciones son paráfrasis. La justificación declarada no mide directamente hechos de violencia sufridos o ejercidos.}
+\end{table}
+
+El compuesto de diez no sustituye al de cinco. Agregar escenarios aumenta
+las oportunidades de una respuesta afirmativa y puede modificar el porcentaje
+sin que cambie la disposición de las personas. Tampoco puede reconstruirse
+su prevalencia sumando porcentajes marginales: una mujer puede justificar
+más de una situación y las intersecciones no se conocen a partir de una tabla
+de ítems separados.
+
+\subsection{Historia de matrimonio y convivencia}
+\var{MA1} distingue matrimonio actual, convivencia actual y ausencia de unión
+actual. Para esta última categoría, \var{MA5} diferencia matrimonio previo
+(uno), convivencia previa (dos) y nunca unión (tres). Confundir el código dos
+con nunca unida clasificaría incorrectamente a antiguas convivientes.
+\var{MA9} registra edad al inicio de la primera unión; \var{WB2}, edad actual.
+
+La implementación utiliza edades declaradas y las contrasta con la trayectoria
+conyugal. El archivo también dispone de edades derivadas \var{wage} y
+\var{wagem}. Una réplica exacta de los tabulados debe comparar estas variables
+y documentar las reglas de edición e imputación de fechas. No se sustituyen
+silenciosamente unas por otras. Si consta unión previa y falta edad, el evento
+se conserva como desconocido. Las mujeres nunca unidas integran el denominador
+con resultado cero.
+
+El dominio principal para ambos umbrales es 20 a 24 años. A diferencia de una
+adolescente de 16 años, todas sus integrantes han superado el umbral de 18.
+Esta restricción evita exposición incompleta respecto al evento, aunque no
+elimina sesgos de recuerdo, supervivencia o migración. Una edad exactamente
+igual a 15 no representa una unión \emph{antes} de los 15.
+
+\FloatBarrier
+\section{Estrategia estadística y reproducibilidad}
+\subsection{Universos, entrevistas y llaves}
+El ejecutor exige entrevistas completas de hogar y de mujer, según
+\var{HH9=1} y \var{WM7=1}. Comprueba unicidad de hogares, miembros y mujeres;
+coincidencia entre el conteo de miembros de 1 a 17 y \var{SL1}; identificación
+del seleccionado en el listado; y coherencia entre las líneas \var{SL9B} y
+\var{CD2} para el dominio infantil. Un diseño incompleto o un peso no positivo
+detiene el análisis, en lugar de eliminar observaciones silenciosamente.
+
+La unión de archivos selecciona campos explícitamente para evitar sufijos
+ambiguos cuando mujeres ya incorpora variables del hogar. Se conserva la
+distinción entre el ponderador individual y el del hogar. Las pruebas incluyen
+hogares con más de un niño elegible y más de una mujer, casos que permiten
+detectar multiplicación de filas y uso del ponderador incorrecto.
+
+\subsection{Ponderación y dominios}
+Sea $w_h$ el peso normalizado del hogar y $N_h^{1:17}$ su número de miembros
+de 1 a 17 años. Para el niño seleccionado se usa
+\begin{equation}
+ w_{hi}^{\mathrm{disc}}=w_h N_h^{1:17}.
+ \label{eq:peso}
+\end{equation}
+La multiplicación compensa la selección intrahogar documentada. No debe
+reemplazarse $N_h^{1:17}$ por el número de niños de 1 a 14 o menores de cinco.
+Para mujeres se utiliza \var{wmweight}, sin sustitución por \var{hhweight}.
+
+Los diseños se construyen antes de restringir los dominios. En infancia se
+retienen todos los hogares completos, incluidos aquellos cuyo seleccionado
+tiene 15 a 17 años. Los hogares sin niños reciben un peso auxiliar positivo
+para construir el diseño, pero contribución nula al dominio y resultado
+desconocido, no cero, en disciplina. En mujeres, la cohorte 20 a 24 se obtiene
+como subpoblación del diseño completo de entrevistadas.
+
+Se emplean \var{psu} y \var{stratum} distribuidos en el archivo de hogares.
+No se sustituye estrato por región. La aproximación de conglomerado último
+usa linealización de Taylor y no incorpora corrección por población finita,
+al no disponer de fracciones de muestreo. La estructura y la variación de
+pesos son parte de la información que debe revisarse \citep{lumley}.
+
+\subsection{Construcción con respuestas parciales}
+Para un compuesto $Y_i$ basado en ítems binarios, una respuesta afirmativa
+identifica presencia aunque otros componentes sean desconocidos. La ausencia
+solo se identifica si todos son negativos. Si no se cumple ninguna condición,
+$Y_i$ permanece desconocido. Esta regla impide que el uso automático de
+sumas con eliminación de ausentes convierta patrones sin información en ceros.
+
+Sea $D$ el dominio y $O\subseteq D$ el conjunto clasificable para un indicador.
+La razón ponderada propuesta es
+\begin{equation}
+ \widehat p_O=\frac{\sum_{i\in O}w_iY_i}{\sum_{i\in O}w_i}.
+ \label{eq:prevalencia}
+\end{equation}
+Cada indicador puede tener su propio conjunto $O$. Extrapolar esta razón a
+todo $D$ requiere supuestos sobre la falta de respuesta. El programa exporta
+tamaños sin ponderar y fracción ponderada desconocida, y no impone una muestra
+completa común a variables que no la necesitan.
+
+Para visualizar la incertidumbre por información faltante se calculan los
+límites extremos
+\begin{align}
+ L_D&=\frac{\sum_{i\in O}w_iY_i}{\sum_{i\in D}w_i},\\
+ U_D&=\frac{\sum_{i\in O}w_iY_i+\sum_{i\in D\setminus O}w_i}
+ {\sum_{i\in D}w_i}.
+ \label{eq:limites}
+\end{align}
+La diferencia $U_D-L_D$ es la fracción ponderada desconocida. Estos límites
+no son intervalos de confianza; no incorporan variación muestral ni corrigen
+errores de declaración. Su función es mostrar cuánto puede importar la parte
+no clasificable bajo asignaciones extremas.
+
+\subsection{Precisión, desagregación y límites de inferencia}
+Los errores estándar provienen de \var{svymean}; los IC95 se calculan con
+\var{svyciprop}, método logit y grados de libertad del diseño del dominio
+clasificable. Se declara el ajuste de estratos con una UPM y se audita su
+presencia. Dominios con menos de 25 observaciones clasificables no presentan
+porcentaje; proporciones exactamente cero o uno conservan su punto, pero no
+reciben un IC logit fabricado.
+
+Las desagregaciones previstas son residencia, quintil y edad, más sexo en
+disciplina. La unión temprana se desagrega por residencia y quintil dentro
+de 20 a 24 años. Las categorías desconocidas de covariables se conservan
+explícitamente. Una diferencia entre grupos no constituye automáticamente
+una diferencia estadísticamente respaldada ni una relación causal.
+
+No se aplica emparejamiento por puntaje de propensión. No se ha definido un
+tratamiento con temporalidad y supuestos de identificación. La riqueza
+observada al entrevistar podría ser antecedente o consecuencia de una unión
+iniciada años antes. El ajuste por covariables contemporáneas no resuelve esa
+ambigüedad. Tampoco se atribuye maternidad a una mujer solo por compartir hogar
+con un niño seleccionado.
+
+\section{Evidencia publicada y resultados de la auditoría}
+\subsection{Naturaleza de las cifras presentadas}
+Los cuadros y gráficos siguientes transcriben una selección de cifras del
+informe oficial. Constituyen \textbf{evidencia secundaria publicada}; no son
+resultados de ejecutar el programa de este repositorio sobre los microdatos.
+Los valores se conservaron a un decimal y se cotejaron visualmente con las
+tablas CP.5, CP.7 y CP.10. No se reconstruyen errores estándar o intervalos
+a partir de porcentajes redondeados.
+
+El informe contiene algunas inconsistencias editoriales: el texto introductorio
+de CP.5 se refiere a trabajo infantil aunque su encabezado y columnas son de
+disciplina; además, ciertas filas departamentales de CP.10 muestran valores
+que no son coherentes con sus encabezados. Esta edición emplea únicamente
+celdas nacionales, de sexo, área o cohorte visualmente identificables; no
+reproduce las filas departamentales problemáticas. Una réplica con microdatos
+deberá aclarar esas discrepancias antes de ampliar la comparación.
+
+\subsection{Disciplina infantil}
+La fila nacional de CP.5 informa 52,0\,\% para cualquier disciplina violenta,
+32,2\,\% para agresión psicológica, 39,4\,\% para castigo físico y 3,0\,\% para
+castigo severo. La categoría exclusivamente no violenta alcanza 35,5\,\%.
+Estas categorías no deben sumarse: las dos formas de violencia pueden
+coexistir y el castigo severo es un subconjunto del físico.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.86\textwidth,height=6.3cm,xbar,bar width=11pt,
+ xmin=0,xmax=60,xtick={0,10,20,30,40,50,60},
+ ytick={0,1,2,3,4},yticklabels={Solo no violenta,Psicológica,Física total,Física severa,Cualquier violenta},
+ ymin=-0.7,ymax=4.7,xlabel={Porcentaje de niños de 1 a 14 años},
+ axis x line*=bottom,axis y line*=left,xmajorgrids=true,grid style={gray!15},
+ tick label style={font=\small},nodes near coords,
+ nodes near coords style={font=\small,/pgf/number format/fixed,/pgf/number format/precision=1}]
+\addplot[fill=petroleo,draw=none] table[x=porcentaje,y=pos,col sep=comma]{data/disciplina.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{Métodos de disciplina: cifras nacionales publicadas}\label{fig:disciplina}
+\fuente{ENS MICS, tabla CP.5, p. 282. Transcripción de porcentajes publicados, sin IC propios. Categorías solapadas salvo ``solo no violenta'' respecto a violencia.}
+\end{figure}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Disciplina infantil por sexo y residencia: porcentajes publicados}\label{tab:discgrupo}
+\begin{tabularx}{\textwidth}{@{}Yrrrrr@{}}\toprule
+Grupo & Solo no & Psico- & Físico & Físico & Cualquier\\
+ & violenta & lógica & total & severo & violenta\\\midrule
+Total & 35,5 & 32,2 & 39,4 & 3,0 & 52,0\\
+Masculino & 34,3 & 33,2 & 42,6 & 3,8 & 54,6\\
+Femenino & 36,6 & 31,3 & 36,2 & 2,2 & 49,5\\
+Urbana & 35,6 & 34,2 & 40,5 & 3,0 & 53,8\\
+Rural & 35,4 & 29,6 & 37,9 & 3,0 & 49,6\\\bottomrule
+\end{tabularx}
+\fuente{Informe oficial, CP.5, p. 282. No se interpretan diferencias puntuales como significativas sin la varianza del diseño.}
+\end{table}
+
+La diferencia publicada entre niños y niñas en cualquier disciplina violenta
+es de 5,1 puntos porcentuales; la diferencia urbana-rural es de 4,2 puntos.
+Son restas descriptivas de celdas redondeadas, no contrastes inferenciales.
+Estos datos tampoco autorizan a concluir que el área de residencia produzca
+la violencia: composición de los hogares, declaración y otros factores
+podrían contribuir a la diferencia.
+
+\subsection{Justificación declarada de la violencia}
+La tabla CP.10 informa 7,7\,\% de justificación en al menos uno de los primeros
+cinco escenarios. El valor publicado es 5,9\,\% en área urbana y 10,8\,\% en
+área rural. Entre los ítems individuales, descuidar a los niños presenta
+5,2\,\%, mientras que hablar con otro hombre, perteneciente a la ampliación
+nacional, registra 5,6\,\%.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.80\textwidth,height=8.1cm,xbar,bar width=8pt,
+ xmin=0,xmax=7,xtick={0,1,2,3,4,5,6,7},
+ ytick={0,1,2,3,4,5,6,7,8,9},
+ yticklabels={Salir sin avisar,Descuidar niños,Discutir,Negarse a sexo,Quemar comida,
+ Hablar con otro hombre,Salir con amistades,Hablar con familiares,No compartir ingresos,Tocar pertenencias},
+ ymin=-0.7,ymax=9.7,xlabel={Porcentaje de mujeres de 15 a 49 años},
+ axis x line*=bottom,axis y line*=left,xmajorgrids=true,grid style={gray!15},
+ tick label style={font=\small},nodes near coords,
+ nodes near coords style={font=\small,/pgf/number format/fixed,/pgf/number format/precision=1}]
+\addplot[fill=petroleo,draw=none] table[x=porcentaje,y=pos,col sep=comma]{data/actitudes.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{Justificación por escenario: porcentajes nacionales publicados}\label{fig:actitudes}
+\fuente{ENS MICS, CP.10, p. 296, fila Total. A-E forman el compuesto de cinco; F-J son adicionales. No sumar las barras ni interpretarlas como victimización.}
+\end{figure}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Justificación de cinco escenarios y contraste de universos}\label{tab:actgrupos}
+\begin{tabularx}{\textwidth}{@{}Yrp{6.8cm}@{}}\toprule
+Dominio & Porcentaje & Interpretación\\\midrule
+Mujeres 15-49, total & 7,7 & Algún escenario A-E, según tabulado oficial\\
+Área urbana, 15-49 & 5,9 & Mismo conjunto A-E y grupo de edades\\
+Área rural, 15-49 & 10,8 & Diferencia rural-urbana descriptiva: 4,9 pp\\
+Mujeres 20-24 & 6,3 & Subgrupo de edad, no todas las mujeres\\
+Compuesto de diez & \multicolumn{1}{c}{---} & No recuperable por suma de marginales; estimación propia pendiente\\\bottomrule
+\end{tabularx}
+\fuente{CP.10, p. 296. El guion indica ausencia de una cifra verificada para el compuesto de diez en esta transcripción; no equivale a cero.}
+\end{table}
+
+El contraste rural-urbano difiere del patrón puntual observado en disciplina.
+Esto muestra por qué las dimensiones no pueden tratarse como sustitutas.
+No demuestra una relación individual negativa entre actitudes y prácticas:
+los informantes, las unidades y los universos son diferentes. Inferir una
+relación individual de estos agregados incurriría en una lectura ecológica
+sin respaldo de vinculación personal.
+
+\subsection{Primera unión: importancia de la cohorte}
+La fila de 20 a 24 años de CP.7 publica 5,8\,\% de unión antes de los 15 y
+25,5\,\% antes de los 18. En cambio, el total de 20 a 49 años alcanza 7,3\,\%
+y 29,1\,\%, respectivamente. Son dominios distintos. La diferencia entre ellos
+no constituye una tendencia temporal estimada: mezcla cohortes e historias
+de exposición y selección.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.86\textwidth,height=5.7cm,ybar,bar width=30pt,
+ ymin=0,ymax=35,ytick={0,5,10,15,20,25,30,35},
+ xmin=13,xmax=20,xtick={15,18},xticklabels={Antes de 15,Antes de 18},
+ ylabel={Porcentaje de mujeres de 20 a 24 años},
+ axis x line*=bottom,axis y line*=left,ymajorgrids=true,grid style={gray!15},
+ nodes near coords,nodes near coords style={font=\small},tick label style={font=\small}]
+\addplot[fill=ocre,draw=none] table[x=umbral,y=porcentaje,col sep=comma]{data/union.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{Primera unión en mujeres de 20 a 24 años: cifras publicadas}\label{fig:union}
+\fuente{ENS MICS, CP.7, p. 288, fila 20-24. El evento antes de 15 está contenido en el evento antes de 18; las barras no son categorías excluyentes.}
+\end{figure}
+
+\begin{table}[htbp]
+\centering\small
+\caption{Umbral de primera unión y población de referencia}\label{tab:union}
+\begin{tabularx}{\textwidth}{@{}YrrY@{}}\toprule
+Población & Antes de 15 & Antes de 18 & Uso en este estudio\\\midrule
+Mujeres 15-49 & 7,0 & --- & Referencia del informe; no es la cohorte principal\\
+Mujeres 20-49 & 7,3 & 29,1 & Referencia amplia, distinta de 20-24\\
+Mujeres 20-24 & 5,8 & 25,5 & Cohorte principal para ambos umbrales\\\bottomrule
+\end{tabularx}
+\fuente{CP.7, pp. 287-288. Valores porcentuales publicados. No se calcula el evento antes de 18 sobre todo el grupo 15-49 debido a exposición incompleta en parte de ese universo.}
+\end{table}
+
+La inclusión de nunca unidas en el denominador es esencial. Si solo se
+consideraran mujeres que alguna vez convivieron en unión, el parámetro sería
+la proporción de inicios tempranos \emph{entre quienes se unieron}, que no es
+la prevalencia retrospectiva en toda la cohorte. El programa conserva esa
+distinción y comprueba coherencia con edad actual.
+
+\subsection{Hallazgos de la auditoría y ejecución pendiente}
+La auditoría documental identificó correcciones en la propuesta previa:
+minúsculas coherentes con la limpieza de nombres; selección intrahogar por
+miembros 1 a 17; código correcto de nunca unión; separación de ``algún'' y
+``solo'' método no violento; y construcción de dominios después del diseño.
+Su finalidad es eliminar errores de definición, no garantizar de antemano
+coincidencia con cifras oficiales.
+
+El programa se verificó con seis bloques y 35 comprobaciones automatizadas,
+incluida la lectura y escritura de archivos SPSS artificiales y la exportación
+de tablas y gráficos. Se restauraron 72 paquetes fijados en el archivo de
+dependencias. Estas comprobaciones corresponden a la implementación actual,
+no a una ejecución efectuada en 2019. No sustituyen la revisión de los
+microdatos originales y de sus etiquetas.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Estado de la evidencia y de la replicación}\label{tab:estado}
+\begin{tabularx}{\textwidth}{@{}YYp{4.0cm}@{}}\toprule
+Producto & Qué se ha realizado & Qué falta\\\midrule
+Cuestionarios y códigos & Cotejo documental y reglas explícitas & Contrastar distribución en SAV del usuario\\
+Gráficos de este artículo & Transcripción verificada del informe & Ningún IC propio calculado\\
+Programa R & Pruebas con SPSS artificial y entorno fijado & Ejecutar microdatos autorizados\\
+Prevalencias propias & Diseño y exportaciones preparados & Estimar puntos, EE, IC y faltantes\\
+Réplica oficial & Referencias CP.5, CP.7 y CP.10 identificadas & Armonizar no respuesta y edades derivadas\\\bottomrule
+\end{tabularx}
+\fuente{Registro de trabajo del repositorio. ``Pendiente'' no implica un resultado nulo ni un fallo de significación.}
+\end{table}
+
+\FloatBarrier
+\section{Discusión}
+\subsection{Qué permite concluir la evidencia disponible}
+Los tabulados oficiales documentan presencia de prácticas violentas y
+justificación declarada en las poblaciones cubiertas, así como experiencias
+retrospectivas de unión temprana. Ofrecen puntos de referencia para la política
+pública y para comprobar órdenes de magnitud de una futura réplica. No son
+evidencia suficiente para atribuir efectos a pobreza, residencia, educación
+o intervenciones.
+
+La lectura conjunta muestra heterogeneidad conceptual. La disciplina violenta
+publicada es mayor en el área urbana, mientras la justificación de los cinco
+escenarios es mayor en el área rural. Esta comparación entre módulos ayuda
+a cuestionar un relato único sobre violencia, pero no estima correlación
+individual. Las diferencias de informante, período, composición y declaración
+deben mantenerse presentes.
+
+La amplitud de los porcentajes no puede compararse mecánicamente entre
+constructos. Disciplina se refiere al último mes y a una combinación de actos;
+unión temprana, a una transición acumulada antes de una edad; y actitudes,
+a una posición declarada. Un valor numéricamente mayor no implica por sí
+solo mayor gravedad ni mayor prioridad relativa sin un marco normativo.
+
+\subsection{Sesgos de medición y límites de cobertura}
+El reporte por un adulto puede subestimar prácticas socialmente censuradas o
+desconocidas por quien responde. La ventana de un mes omite experiencias
+anteriores. Los ítems no registran de forma exhaustiva frecuencia, intensidad,
+consecuencias ni contextos de coerción. Una clasificación cero de disciplina
+violenta no equivale a una certificación integral de seguridad.
+
+Las respuestas sobre violencia contra la esposa pueden depender del lenguaje
+del escenario y del contexto de entrevista. ``No sabe'' puede reflejar
+incertidumbre, ambivalencia o dificultad para responder; tratarlo como
+rechazo impondría una interpretación no demostrada. La estrategia de casos
+clasificables debe acompañarse de faltantes y sensibilidad, no presentarse
+como solución automática al sesgo.
+
+La edad declarada de primera unión puede contener errores de recuerdo y
+concentración en edades enteras. Restringir a 20 a 24 años evita exposición
+incompleta a los umbrales, pero no sesgos de supervivencia y migración.
+El hogar observado puede diferir del de origen; riqueza actual no es una
+medida inequívoca de condiciones previas a la unión.
+
+\subsection{Comparabilidad y agenda de investigación}
+Una réplica debe cotejar \var{MA9} con la edad derivada \var{wagem}, armonizar
+las reglas de no respuesta y contrastar universos. La coincidencia aproximada
+con un porcentaje redondeado no valida por sí sola todo el procesamiento.
+Se requiere revisar pesos, llaves, exclusiones y varianzas, además de resolver
+las inconsistencias editoriales detectadas en el informe.
+
+Para estudiar asociaciones entre normas maternas y disciplina se debe
+identificar explícitamente madre o cuidadora, establecer un universo vinculado
+y considerar selección y temporalidad. Para evaluar políticas se necesitarían
+comparaciones temporales o diseños adicionales. El presente protocolo ofrece
+una base para formular esas preguntas sin adelantar su respuesta.
+
+Desde el enfoque de derechos, los resultados secundarios justifican examinar
+crianza, servicios de apoyo y protección de adolescentes. El marco INSPIRE
+orienta ámbitos de acción complementarios, pero los datos aquí presentados
+no seleccionan por sí solos una intervención ni cuantifican su efectividad.
+
+\section{Conclusiones}
+La medición reproducible de la violencia familiar exige correspondencia entre
+pregunta, código, unidad, período, denominador y ponderador. En la ENS MICS
+2014, omitir la selección infantil o confundir convivencia previa con nunca
+unión altera el significado del indicador. También es indispensable separar
+actitudes de experiencias y reconocer la coexistencia de prácticas.
+
+El artículo presenta evidencia secundaria de tres dimensiones y un protocolo
+para estimaciones propias futuras. Los gráficos y tabulados se identifican
+como transcripciones del informe oficial; el programa todavía no ha producido
+resultados con microdatos reales. Esta distinción permite aprovechar la
+información publicada sin simular una réplica empírica inexistente.
+
+La siguiente etapa consiste en obtener los archivos autorizados, revisar su
+diccionario, ejecutar el diseño complejo y documentar concordancias y
+diferencias con la referencia oficial. Hasta entonces, las conclusiones
+causales y los contrastes de significación permanecen fuera del alcance del
+trabajo.
+
+\section*{Disponibilidad y resguardo de los datos}
+El código y la documentación se encuentran en
+\url{https://github.com/vtablas001/Violence_MICS}. No se redistribuyen microdatos
+ni registros individuales. Las condiciones del proveedor rigen su acceso y
+uso; las tablas que se generen deberán someterse a revisión de divulgación.
+Las fuentes se consultaron en 2026 y se citan por su fecha original. La fecha
+editorial de referencia no altera las fechas de ejecución o de publicación
+de los archivos del repositorio.
+
+\begin{thebibliography}{9}
+\bibitem[Lumley(2004)]{lumley}
+Lumley, T. (2004).
+Analysis of Complex Survey Samples.
+\emph{Journal of Statistical Software}, 9(8), 1-19.
+\url{https://doi.org/10.18637/jss.v009.i08}.
+
+\bibitem[MINSAL-INS, DIGESTYC y UNICEF(s.\,f.)]{ens}
+Ministerio de Salud, Instituto Nacional de Salud, Dirección General de
+Estadísticas y Censos y UNICEF (s.\,f.).
+\emph{Encuesta Nacional de Salud de Indicadores Múltiples por Conglomerados
+2014: informe final}. Tablas CP.5, CP.7 y CP.10; nota 5, p. 306; apéndices A y F.
+\url{https://www.unicef.org/elsalvador/media/1261/file/mics_final.pdf}.
+Se identifica el año de encuesta sin atribuir una fecha editorial no verificada.
+
+\bibitem[MINSAL-INS, DIGESTYC y UNICEF(2014)]{catalogo}
+Ministerio de Salud, Instituto Nacional de Salud, Dirección General de
+Estadísticas y Censos y UNICEF (2014).
+\emph{Encuesta de Indicadores Múltiples por Conglomerados, El Salvador}.
+Referencia \var{SLV_2014_MICS_v01_M}. Metadatos catalogados en 2017.
+\url{https://microdata.worldbank.org/index.php/catalog/2780}.
+
+\bibitem[ONU Mujeres, UNICEF y UNFPA(2017)]{onu2017}
+ONU Mujeres, UNICEF y UNFPA (2017, 17 de agosto).
+\emph{Agencias de las Naciones Unidas reconocen importantes reformas
+legislativas para prohibir el matrimonio infantil y las uniones tempranas en
+El Salvador}.
+\href{https://www.unicef.org/elsalvador/comunicados-prensa/agencias-de-las-naciones-unidas-reconocen-importantes-reformas-legislativas-para}{Comunicado oficial de UNICEF El Salvador}.
+
+\bibitem[OMS y asociados(2016)]{inspire}
+Organización Mundial de la Salud y asociados (2016).
+\emph{INSPIRE: Seven strategies for ending violence against children}.
+Ginebra: OMS.
+\href{https://www.who.int/publications/i/item/inspire-seven-strategies-for-ending-violence-against-children}{Publicación oficial}.
+\end{thebibliography}
+
+\clearpage
+\appendix
+\section{Diccionario mínimo y reglas de validación}\label{anexo:diccionario}
+Los nombres se limpian a minúsculas al leer los archivos. El cuadro conserva
+su forma original para facilitar el cotejo con el cuestionario. Los códigos
+de no sabe o falta de respuesta no se interpretan como respuestas sustantivas.
+
+\begin{longtable}{@{}p{2.4cm}p{2.6cm}p{9.9cm}@{}}
+\caption{Campos requeridos y comprobaciones}\label{tab:diccionario}\\
+\toprule Archivo & Campo & Definición y regla\\\midrule\endfirsthead
+\toprule Archivo & Campo & Definición y regla (continuación)\\\midrule\endhead
+\bottomrule\endfoot
+hh, hl, wm & HH1, HH2 & Identificadores del hogar. No se admiten llaves faltantes ni hogares duplicados.\\
+hl & HL1 & Línea de miembro; única dentro de hogar.\\
+wm & WM4 & Línea de mujer; única dentro de hogar.\\
+hh & HH9 & Resultado de entrevista; se requieren hogares completos, código 1.\\
+wm & WM7 & Resultado de entrevista; se requieren mujeres completas, código 1.\\
+hh & SL1 & Conteo entero no negativo de miembros 1-17; debe coincidir con HL6.\\
+hh & SL9B, SL9C & Línea y edad del seleccionado; deben coincidir con el listado.\\
+hh & CD2 & Línea del niño 1-14; debe ser la misma que SL9B.\\
+hl & HL4, HL6 & Sexo y edad cumplida. El sexo se presenta como factor.\\
+hh & HH6 & Área: 1 urbana, 2 rural.\\
+hh & windex5 & Quintil nacional combinado, 1 a 5.\\
+hh & psu, stratum & UPM y estrato; no se sustituyen por región.\\
+hh & hhweight & Ponderador positivo; se multiplica por SL1 para infancia.\\
+wm & wmweight & Ponderador individual positivo, sin sustitución.\\
+hh & CD3A-K & Sí 1, no 2; otros códigos documentados como desconocidos se conservan como NA.\\
+wm & DV1A-J & Sí 1, no 2, no sabe 8; faltantes permanecen desconocidos.\\
+wm & WB2 & Edad actual; entrevistas de mujeres 15-49.\\
+wm & MA1 & 1 casada; 2 acompañada; 3 no en unión actual.\\
+wm & MA5 & Si MA1=3: 1 casada antes; 2 acompañada antes; 3 nunca unida.\\
+wm & MA9 & Edad declarada de primera unión; 98/99 desconocidos en el protocolo. Se rechazan edades futuras o incompatibles con trayectoria.\\
+\end{longtable}
+
+\section{Trazabilidad de las cifras secundarias}\label{anexo:trazabilidad}
+Los datos de los gráficos se guardan como archivos CSV dentro del proyecto.
+Son agregados transcritos del informe, no microdatos. Las páginas de la columna
+final corresponden a la numeración impresa; la página del visor PDF es dos
+unidades mayor. El compuesto de diez escenarios no se calcula con marginales.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Origen verificable de los valores graficados}\label{tab:traza}
+\begin{tabularx}{\textwidth}{@{}p{2.7cm}Y>{\raggedright\arraybackslash}p{2.8cm}@{}}\toprule
+Archivo o elemento & Valores porcentuales y dominio & Localizador\\\midrule
+\var{disciplina.csv} & 35,5; 32,2; 39,4; 3,0; 52,0. Niños 1-14, total nacional & CP.5, p. 282; PDF 284\\
+\var{actitudes.csv} & A-J: 1,6; 5,2; 2,5; 1,8; 2,0; 5,6; 2,4; 0,7; 1,3; 1,3. Mujeres 15-49 & CP.10, p. 296; PDF 298\\
+\var{union.csv} & 5,8 y 25,5; primera unión antes de 15 y 18, mujeres 20-24 & CP.7, p. 288; PDF 290\\
+Cuadro \ref{tab:discgrupo} & Filas Total, Masculino, Femenino, Urbana y Rural & CP.5, p. 282\\
+Cuadro \ref{tab:actgrupos} & Compuesto A-E: Total, Urbana, Rural y 20-24 & CP.10, p. 296\\
+Cuadro \ref{tab:union} & Totales 15-49 y 20-49; fila 20-24 & CP.7, pp. 287-288\\\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{samepage}
+La fuente descargada se identifica mediante SHA256:
+\begin{quote}\begin{minipage}{\linewidth}\footnotesize\ttfamily
+81eac967646e1808434c5dd21c9d30237\\
+eaea93c33795ea6b281e10709e4c1a0
+\end{minipage}\end{quote}
+\end{samepage}
+El salto de línea divide visualmente una sola cadena hexadecimal. No se
+reconstruyen tamaños sin ponderar a partir de las bases ponderadas publicadas
+ni se fabrican intervalos. Las diferencias mencionadas en el texto son restas
+de porcentajes redondeados y se identifican como tales.
+
+\section{Sensibilidad a desconocidos: ejemplo analítico}
+Si la fracción ponderada desconocida es $m$ y la proporción entre casos
+clasificables es $p_O$, los límites extremos son
+$L=(1-m)p_O$ y $U=(1-m)p_O+m$. La figura \ref{fig:sensibilidad} fija
+$p_O=0{,}40$ únicamente para ilustrar la identidad. Ninguno de sus puntos es
+una estimación de El Salvador ni una simulación calibrada al país.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.86\textwidth,height=6cm,xmin=0,xmax=30,ymin=20,ymax=65,
+ xlabel={Fracción ponderada desconocida (\%)},ylabel={Proporción posible (\%)},
+ grid=major,grid style={gray!15},legend style={font=\small,at={(0.5,-0.25)},anchor=north,legend columns=2}]
+\addplot[petroleo,thick,domain=0:30,samples=31]{40*(1-x/100)};
+\addlegendentry{Límite inferior}
+\addplot[ocre,thick,domain=0:30,samples=31]{40*(1-x/100)+x};
+\addlegendentry{Límite superior}
+\end{axis}
+\end{tikzpicture}
+\caption{Amplitud por información faltante: identidad bajo un ejemplo hipotético}\label{fig:sensibilidad}
+\fuente{Cálculo algebraico ilustrativo con $p_O=0{,}40$. No son datos empíricos, IC ni resultados del programa aplicado a la encuesta.}
+\end{figure}
+
+El ejemplo muestra que ignorar faltantes puede ocultar un rango amplio de
+valores compatibles con la información observada. No prueba que los
+desconocidos tengan mayor o menor prevalencia, ni reemplaza estrategias de
+imputación sustentadas en supuestos explícitos.
+
+\FloatBarrier
+\section{Protocolo de ejecución y tabulado propio pendiente}
+La biblioteca de R se fija en \var{renv.lock}. La secuencia reproducible es:
+obtener los tres SAV bajo condiciones autorizadas; restaurar dependencias;
+ejecutar pruebas; correr el análisis en una carpeta vacía; revisar el
+diccionario observado, la auditoría de diseño y los estados de estimación;
+y cotejar definiciones antes de comparar con los tabulados del informe.
+
+\begin{verbatim}
+Rscript -e 'renv::load(); source("tests/run_tests.R")'
+Rscript -e 'renv::load(); source("scripts/run_analysis.R")' \
+  data/raw results/real
+\end{verbatim}
+El salto con barra invertida corresponde a una terminal compatible; en
+PowerShell se puede escribir el segundo comando en una sola línea. En R,
+la primera preparación consiste en instalar \var{renv}, cargar el proyecto
+y ejecutar \var{renv::restore(prompt=FALSE)}.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Estructura del tabulado propio a completar con microdatos}\label{tab:plantilla}
+\begin{tabularx}{\textwidth}{@{}Yccccc@{}}\toprule
+Indicador y dominio & $n$ válido & \% & EE & IC95 & \% desc.\\\midrule
+Disciplina violenta, 1-14 & --- & --- & --- & --- & ---\\
+Físico severo, 1-14 & --- & --- & --- & --- & ---\\
+Justifica cinco, 15-49 & --- & --- & --- & --- & ---\\
+Justifica diez, 15-49 & --- & --- & --- & --- & ---\\
+Unión antes de 15, 20-24 & --- & --- & --- & --- & ---\\
+Unión antes de 18, 20-24 & --- & --- & --- & --- & ---\\\bottomrule
+\end{tabularx}
+\fuente{Plantilla de resultados propios pendientes. Los guiones significan ``no calculado'', nunca cero. No copiar a estas celdas cifras oficiales como si fueran reestimaciones.}
+\end{table}
+
+El archivo de estimaciones incorpora además límites extremos por desconocidos,
+grados de libertad, número de afirmativas y estado de la estimación. La
+salida de auditoría identifica filas del diseño, UPM, estratos, estratos con
+una UPM y rango de pesos. Las huellas de archivos y la información de sesión
+permiten identificar la versión local usada.
+
+\section{Correcciones y criterios de lectura}
+\begin{table}[htbp]
+\centering\small
+\caption{Correcciones que cambian el significado del análisis}\label{tab:correcciones}
+\begin{tabularx}{\textwidth}{@{}YY@{}}\toprule
+Riesgo de interpretación & Regla adoptada\\\midrule
+Usar MA5=2 como nunca unida & Nunca unida requiere MA1=3 y MA5=3\\
+Ponderar infancia solo con hhweight & Multiplicar por SL1, miembros 1-17\\
+Exigir nombres con letras mayúsculas después de limpiar & Usar sufijos minúsculos coherentes\\
+Filtrar edades antes de crear diseño & Construir diseño y luego estimar dominios\\
+Tratar algún método no violento como exclusivo & Exigir además ausencia de todo acto violento\\
+Sumar los diez porcentajes DV & Construir unión de eventos en microdatos\\
+Presentar no sabe como no & Conservar desconocidos y sus denominadores\\
+Leer diferencias de porcentajes como efectos & Mantener interpretación descriptiva e incertidumbre\\\bottomrule
+\end{tabularx}
+\end{table}
+
+Los gráficos oficiales, la ilustración matemática y las estimaciones propias
+pendientes mantienen identificaciones separadas para facilitar su lectura
+y replicación.
+
+\end{document}
