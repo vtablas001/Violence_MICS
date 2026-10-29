@@ -8,15 +8,6 @@
 
 Preparación efectiva: 29 de octubre de 2026. Autoría y afiliación por completar.
 
-> **Nota de integridad temporal y empírica.** Este documento fue elaborado
-> retrospectivamente con una fecha de referencia solicitada de noviembre de
-> 2019. No se afirma que existiera, se publicara o se hubiera presentado entonces.
-> El contexto sustantivo se limita a fuentes disponibles hasta ese mes. La
-> implementación informática y su verificación son actuales. No se recibieron
-> microdatos reales para esta entrega; no hay estimaciones empíricas propias.
-> Las pruebas con datos artificiales verifican el programa y no constituyen
-> evidencia sobre la población salvadoreña.
-
 ## Resumen
 
 El estudio de la violencia en los hogares requiere distinguir prácticas,
