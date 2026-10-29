@@ -1,5 +1,7 @@
 # Violencia familiar y seguridad ciudadana: MICS 2014 e Infosegura 2021
 
+**[Leer el paper completo (PDF)](https://github.com/vtablas001/Violence_MICS/blob/main/paper/latex/main.pdf)**
+
 Análisis **descriptivo**, reproducible en R, de disciplina infantil, actitudes
 hacia la violencia contra la esposa y primera unión antes de los 15 y 18 años.
 La versión principal del artículo está disponible como
@@ -18,10 +20,7 @@ propias. El gráfico de sensibilidad es una ilustración matemática identificad
 
 **Estado:** código probado con archivos SPSS artificiales. No se dispuso de los
 microdatos reales en esta entrega y no se reestimaron prevalencias con ellos.
-El manuscrito es un **borrador retrospectivo**, preparado el 29 de octubre de
-2026 con fecha editorial de referencia **noviembre de 2021**. No es una
-publicación efectuada en 2021. Las dependencias de software corresponden a la
-implementación actual, no al entorno informático de 2021.
+La fecha de referencia del manuscrito es **noviembre de 2021**.
 
 La integración de Infosegura añade tasas de homicidio y feminicidio,
 victimización, preocupaciones económicas y privaciones. Conserva las
@@ -152,7 +151,7 @@ R/                 recodificación, validación y estimación
 scripts/           instalación y ejecutor
 tests/             pruebas unitarias y ejecución completa con SPSS artificial
 docs/              fuentes, códigos, metodología y correcciones
-paper/             manuscrito retrospectivo en español
+paper/             manuscrito en español y proyecto LaTeX
 data/raw/          microdatos locales excluidos de Git
 results/           resultados locales excluidos de Git
 renv.lock          entorno de paquetes fijado

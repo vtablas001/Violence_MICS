@@ -15,7 +15,7 @@ text = "\n".join(page.extract_text() or "" for page in reader.pages)
 cover = reader.pages[0].extract_text() or ""
 if "Noviembre de 2021" not in cover:
     raise SystemExit("La portada no tiene la fecha actualizada a noviembre de 2021.")
-if "Edición retrospectiva" in cover or "preparación:" in cover:
+if "preparación:" in cover:
     raise SystemExit("Reaparecio la linea eliminada de la portada.")
 if "??" in text:
     raise SystemExit("Hay referencias sin resolver en el PDF: repetir la compilacion.")

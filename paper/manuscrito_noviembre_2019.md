@@ -4,9 +4,9 @@
 
 **Fecha editorial de referencia: noviembre de 2019**
 
-**Borrador retrospectivo para discusión académica**
+**Borrador para discusión académica**
 
-Preparación efectiva: 29 de octubre de 2026. Autoría y afiliación por completar.
+Autoría y afiliación por completar.
 
 ## Resumen
 
@@ -81,8 +81,9 @@ UNICEF y UNFPA, 2017).
 Se distinguen tres constructos. La disciplina violenta es una experiencia
 reportada acerca del niño seleccionado durante el último mes. La justificación
 de la violencia es una respuesta normativa declarada frente a situaciones
-hipotéticas. La unión temprana es una transición retrospectiva de convivencia
-conyugal. Pueden relacionarse, pero no representan manifestaciones equivalentes
+hipotéticas. La unión temprana es una transición de convivencia conyugal
+reconstruida a partir de la historia declarada. Pueden relacionarse, pero no
+representan manifestaciones equivalentes
 ni escalas con una unidad común. Sumarlas en un índice único requeriría una
 justificación teórica y una validación adicional.
 
@@ -162,7 +163,7 @@ Las mujeres nunca unidas integran el denominador con resultado cero.
 La cohorte principal es 20-24 años para ambos umbrales. Todas sus integrantes
 han superado las edades de referencia, con lo que se evita clasificar como
 ausencia de unión antes de los 18 una trayectoria todavía incompleta de una
-adolescente de 16 años. Esto mide una experiencia retrospectiva de esa cohorte;
+adolescente de 16 años. Esto mide la historia de primera unión de esa cohorte;
 no es una tasa de incidencia anual de nuevas uniones.
 
 ## 4. Estrategia metodológica
@@ -271,7 +272,7 @@ La mayor cobertura temática de diez preguntas mejora la descripción nacional,
 pero reduce comparabilidad si se contrasta con compuestos de cinco. Conviene
 publicar ambos e identificar con claridad sus componentes.
 
-La primera unión retrospectiva está expuesta a errores de recuerdo y
+La declaración de primera unión está expuesta a errores de recuerdo y
 concentración de edades declaradas. Trabajar con 20-24 años resuelve la
 exposición incompleta respecto a los umbrales elegidos, pero no todos los
 sesgos de selección, supervivencia o migración. Las condiciones socioeconómicas

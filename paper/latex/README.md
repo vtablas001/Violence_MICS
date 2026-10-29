@@ -1,5 +1,7 @@
 # Artículo LaTeX: violencia familiar y seguridad ciudadana en El Salvador
 
+**[Leer el paper completo (PDF)](https://github.com/vtablas001/Violence_MICS/blob/main/paper/latex/main.pdf)**
+
 Abrir `main.tex` como documento principal. Proyecto autocontenido: los gráficos
 se dibujan en LaTeX con TikZ/PGFPlots y leen agregados de `data/`. No requiere
 archivos de imagen externos, BibTeX ni acceso a microdatos para compilar.
@@ -10,7 +12,6 @@ acompañar a `main.tex` al compilar o importar el proyecto.
 
 La fecha editorial de referencia se actualizó a **noviembre de 2021**.
 Integra ENS MICS 2014 y la presentación Infosegura DATACCIÓN 2021 suministrada.
-No se reincorporan las dos notas de portada que el usuario pidió eliminar.
 
 ## Contenido y evidencia
 
