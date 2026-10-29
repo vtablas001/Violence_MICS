@@ -1,0 +1,11 @@
+Package: ViolenceMICS
+Type: Project
+Title: Violencia y proteccion en la ENS MICS El Salvador 2014
+Version: 1.0.0
+Authors@R: person("Equipo", "de investigacion", role = c("aut", "cre"))
+Description: Analisis descriptivo reproducible con diseno complejo. No estima efectos causales.
+License: file LICENSE
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports: dplyr (>= 1.1.0), haven, janitor, survey, readr, ggplot2
+Suggests: testthat, renv
