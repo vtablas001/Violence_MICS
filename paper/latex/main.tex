@@ -20,7 +20,7 @@
 \usepackage{lastpage}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=teal,
- pdftitle={Violencia familiar en El Salvador: ENS MICS 2014},
+ pdftitle={Violencia familiar y seguridad ciudadana en El Salvador: MICS e Infosegura},
  pdfauthor={Borrador para discusión académica}}
 \definecolor{petroleo}{HTML}{146475}
 \definecolor{gris}{HTML}{52606B}
@@ -36,7 +36,7 @@
 \setlist{nosep,leftmargin=*}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small ENS MICS El Salvador 2014}
+\fancyhead[L]{\small MICS 2014 e Infosegura 2021}
 \fancyhead[R]{\small Violencia y protección}
 \fancyfoot[C]{\small \thepage\ de \pageref{LastPage}}
 \renewcommand{\headrulewidth}{0.3pt}
@@ -46,34 +46,36 @@
 \setlength{\@fpsep}{16pt plus 2pt minus 2pt}
 \setlength{\@fpbot}{0pt plus 1fil}
 \makeatother
-\title{\vspace{-1.2cm}\textbf{Medir la violencia en el ámbito familiar en El Salvador}\\[0.4em]
-\large Disciplina infantil, actitudes hacia la violencia contra la esposa\\ y uniones tempranas en la ENS MICS 2014}
+\title{\vspace{-1.2cm}\textbf{Violencia familiar y seguridad ciudadana en El Salvador}\\[0.4em]
+\large Disciplina infantil, normas de género y uniones tempranas\\
+en diálogo con el análisis multidimensional de Infosegura}
 \author{Borrador para discusión académica}
-\date{Noviembre de 2019}
+\date{Noviembre de 2021}
 
 \begin{document}
 \maketitle
 \thispagestyle{fancy}
 \begin{abstract}
-El estudio de la violencia familiar exige distinguir prácticas, actitudes y
-trayectorias biográficas. Este artículo examina la Encuesta Nacional de Salud
-de Indicadores Múltiples por Conglomerados de El Salvador de 2014 y propone un
-protocolo reproducible para analizar disciplina infantil, justificación
-de la violencia contra la esposa y primera unión antes de los 15 y 18 años.
-Se combinan una auditoría del instrumento, una lectura de tabulados oficiales
-y una estrategia de estimación que considera selección intrahogar, ponderadores,
-estratos, conglomerados y datos desconocidos. Los cuadros publicados informan
-52,0\,\% de disciplina violenta en niños de 1 a 14 años, 7,7\,\% de justificación
-en alguno de cinco escenarios entre mujeres de 15 a 49 años y 25,5\,\% de primera
-unión antes de los 18 entre mujeres de 20 a 24 años. Son cifras secundarias del
-informe oficial, no una reestimación propia. El programa en R se verificó con
-archivos artificiales; la ejecución con microdatos autorizados y los intervalos
-propios permanecen pendientes. La contribución consiste en precisar unidades,
-denominadores y reglas de construcción, sin atribuir a estos indicadores
-alcance causal ni cobertura exhaustiva de la violencia familiar.
+La seguridad ciudadana requiere observar tanto los delitos registrados como
+las relaciones familiares y las condiciones de vida. Este artículo articula
+los módulos de disciplina infantil, actitudes de género y primera unión de la
+ENS MICS 2014 con la presentación de Infosegura sobre El Salvador de 2021.
+Combina una auditoría del cuestionario, tabulados oficiales y agregados de
+homicidios, victimización y contexto económico. MICS publica 52,0\,\% de
+disciplina violenta en niños de 1 a 14 años. Infosegura presenta una reducción
+de la tasa total de homicidios de 106,3 en 2015 a 20,9 en 2020 por cada cien mil
+habitantes, mientras su proyección de 2021 muestra señales diferentes para
+las muertes de mujeres. La lectura conjunta amplía el diagnóstico, sin
+identificar una trayectoria individual entre disciplina y violencia letal.
+Se preservan las unidades, períodos y límites de cada fuente, incluidas las
+proyecciones y las bases incompletamente documentadas. Las cifras son
+secundarias, no reestimaciones propias. El protocolo en R considera diseño
+complejo y desconocidos y se verificó con datos artificiales; la aplicación a
+microdatos reales permanece pendiente. Se propone una agenda que vincula
+apoyo a cuidadores, prevención de violencia de género y oportunidades de desarrollo.
 \end{abstract}
 \noindent\textbf{Palabras clave:} violencia familiar; disciplina infantil;
-normas de género; unión temprana; encuestas complejas; El Salvador.
+normas de género; unión temprana; seguridad ciudadana; Infosegura; El Salvador.
 
 \section{Introducción}
 La violencia en el hogar es un problema de derechos y de medición. Los hechos
@@ -104,6 +106,14 @@ resultados distingue evidencia secundaria publicada de estimaciones propias
 todavía no calculadas. No se utiliza la información artificial de las pruebas
 como evidencia sobre la población salvadoreña.
 
+La presentación de Infosegura \citep{infosegura2021} introduce una segunda
+pregunta: ¿en qué medida una mejora de los indicadores generales de seguridad
+describe también la protección dentro del hogar? Su lectura de homicidios,
+victimización, percepción y privaciones económicas permite situar los módulos
+MICS en un diagnóstico más amplio. Las fuentes no observan a las mismas
+personas ni el mismo momento; se articulan documentalmente, sin unir sus
+registros ni construir una serie de prevalencia familiar de 2014 a 2021.
+
 \section{Contexto y marco conceptual}
 \subsection{Violencia, protección y política pública}
 El informe nacional incorpora disciplina, actitudes y matrimonio temprano
@@ -124,7 +134,7 @@ porcentaje transversal.
 
 En El Salvador, las reformas sobre matrimonio infantil reconocidas por agencias
 de Naciones Unidas en agosto de 2017 constituyen un antecedente relevante para
-la discusión disponible a noviembre de 2019 \citep{onu2017}. La ENS MICS fue
+la discusión disponible a noviembre de 2021 \citep{onu2017}. La ENS MICS fue
 levantada antes de esa reforma. Sus datos de 2014 pueden funcionar como
 referencia previa, pero no permiten estimar el impacto de un cambio legal
 posterior. Además, una unión de convivencia y un matrimonio formal son
@@ -145,6 +155,8 @@ además de validar su estructura. Tampoco se denomina a las preguntas de actitud
 una escala validada de machismo estructural. El término \emph{instrumento} se
 refiere aquí al cuestionario de encuesta, no a una variable instrumental
 econométrica.
+
+\input{sections/infosegura_marco}
 
 \begin{table}[htbp]
 \centering\small
@@ -193,6 +205,23 @@ la vinculación no multiplique registros.
 \caption{Arquitectura de los archivos y de los dominios analíticos}\label{fig:flujo}
 \fuente{Esquema del protocolo propuesto. Compartir hogar no basta para atribuir maternidad ni para vincular automáticamente la actitud de una mujer con la disciplina de un niño.}
 \end{figure}
+
+\subsection{La presentación de Infosegura como fuente secundaria}
+Se utiliza la copia facilitada de \emph{Análisis Multidimensional de Seguridad
+Ciudadana. Primer Semestre 2021. El Salvador}, de 14 diapositivas. Sus pies
+atribuyen las cifras a PNUD a través de Infosegura, con datos de mesas técnicas,
+PNC, DIGESTYC y encuestas de Cultura de Paz. Se extrajeron agregados de las
+cachés de sus gráficos y se cotejaron con una representación en PowerPoint.
+Los libros Excel vinculados no están incluidos y no se intentó acceder a sus
+enlaces privados. Las cachés permiten reproducir la selección utilizada,
+pero no verificar ponderadores o registros primarios.
+
+Aunque el título se refiere al primer semestre, la diapositiva 6 precisa un
+corte a agosto y otras muestran proyecciones de 2021. Por ello no se impone
+un período uniforme a toda la presentación. Las unidades y restricciones se
+identifican por gráfico. Se excluyen del análisis cuantitativo migración y
+revictimización por no disponer de bases suficientemente verificadas; tampoco
+se usa la serie histórica mixta de la diapositiva 3.
 
 \subsection{Selección del niño y disciplina}
 El módulo de selección identifica un niño entre los miembros de 1 a 17 años.
@@ -379,6 +408,25 @@ iniciada años antes. El ajuste por covariables contemporáneas no resuelve esa
 ambigüedad. Tampoco se atribuye maternidad a una mujer solo por compartir hogar
 con un niño seleccionado.
 
+\subsection{Triangulación documental y proceso de registro}
+La integración compara dimensiones y patrones de fuentes independientes.
+No agrega porcentajes de niños, tasas de mortalidad y opiniones de adultos
+en una misma escala. Tampoco asigna el contexto económico de 2020 a cada
+niño observado en 2014 como si fuese una covariable contemporánea.
+El cuadro \ref{tab:comparabilidad} fija la correspondencia entre fuentes.
+
+En los registros de denuncias, la observación depende tanto de la ocurrencia
+como del acceso al sistema y su captura. Una descomposición conceptual es
+\begin{equation}
+ \mathbb{E}[R_t] = V_t\,\pi_t\,\rho_t,
+ \label{eq:registro}
+\end{equation}
+donde $V_t$ representa hechos potencialmente denunciables, $\pi_t$ la
+probabilidad de denunciar y $\rho_t$ la de registro una vez denunciado el
+hecho. Es un esquema de medición, no un modelo estimado con estas fuentes.
+Un cambio de denuncias no identifica por sí solo un cambio equivalente de
+violencia real, especialmente si cambian movilidad, atención o período cubierto.
+
 \section{Evidencia publicada y resultados de la auditoría}
 \subsection{Naturaleza de las cifras presentadas}
 Los cuadros y gráficos siguientes transcriben una selección de cifras del
@@ -530,6 +578,8 @@ la proporción de inicios tempranos \emph{entre quienes se unieron}, que no es
 la prevalencia retrospectiva en toda la cohorte. El programa conserva esa
 distinción y comprueba coherencia con edad actual.
 
+\input{sections/infosegura_resultados}
+
 \subsection{Hallazgos de la auditoría y ejecución pendiente}
 La auditoría documental identificó correcciones en la propuesta previa:
 minúsculas coherentes con la limpieza de nombres; selección intrahogar por
@@ -542,7 +592,7 @@ El programa se verificó con seis bloques y 35 comprobaciones automatizadas,
 incluida la lectura y escritura de archivos SPSS artificiales y la exportación
 de tablas y gráficos. Se restauraron 72 paquetes fijados en el archivo de
 dependencias. Estas comprobaciones corresponden a la implementación actual,
-no a una ejecución efectuada en 2019. No sustituyen la revisión de los
+no a una ejecución histórica en 2021. No sustituyen la revisión de los
 microdatos originales y de sus etiquetas.
 
 \begin{table}[htbp]
@@ -620,6 +670,8 @@ crianza, servicios de apoyo y protección de adolescentes. El marco INSPIRE
 orienta ámbitos de acción complementarios, pero los datos aquí presentados
 no seleccionan por sí solos una intervención ni cuantifican su efectividad.
 
+\input{sections/infosegura_discusion}
+
 \section{Conclusiones}
 La medición reproducible de la violencia familiar exige correspondencia entre
 pregunta, código, unidad, período, denominador y ponderador. En la ENS MICS
@@ -632,6 +684,13 @@ para estimaciones propias futuras. Los gráficos y tabulados se identifican
 como transcripciones del informe oficial; el programa todavía no ha producido
 resultados con microdatos reales. Esta distinción permite aprovechar la
 información publicada sin simular una réplica empírica inexistente.
+
+El aporte de Infosegura modifica la lectura sustantiva: la reducción de
+homicidios generales puede coexistir con señales distintas por género,
+exposición a delincuencia y vulnerabilidades económicas. Los indicadores de
+MICS aportan una dimensión familiar que ese descenso no permite dar por
+resuelta. La articulación respalda una agenda de prevención con seguimiento
+de varias fuentes, sin demostrar un tránsito causal entre ellas.
 
 La siguiente etapa consiste en obtener los archivos autorizados, revisar su
 diccionario, ejecutar el diseño complejo y documentar concordancias y
@@ -654,6 +713,14 @@ Lumley, T. (2004).
 Analysis of Complex Survey Samples.
 \emph{Journal of Statistical Software}, 9(8), 1-19.
 \url{https://doi.org/10.18637/jss.v009.i08}.
+
+\bibitem[PNUD/Infosegura(2021)]{infosegura2021}
+PNUD a través de Infosegura (2021).
+\emph{Análisis Multidimensional de Seguridad Ciudadana. Primer Semestre 2021.
+El Salvador}. Presentación de DATACCIÓN, versión 3.0 facilitada por el usuario.
+Diapositivas 4, 5, 7, 8, 10, 12 y 13. Se utiliza esta versión concreta y no
+se le atribuye una URL pública no verificada. Los pies de las diapositivas
+identifican a los productores originales de cada serie.
 
 \bibitem[MINSAL-INS, DIGESTYC y UNICEF(s.\,f.)]{ens}
 Ministerio de Salud, Instituto Nacional de Salud, Dirección General de
@@ -837,6 +904,8 @@ Leer diferencias de porcentajes como efectos & Mantener interpretación descript
 Los gráficos oficiales, la ilustración matemática y las estimaciones propias
 pendientes mantienen identificaciones separadas para facilitar su lectura
 y replicación.
+
+\input{sections/infosegura_anexo}
 
 \end{document}
 

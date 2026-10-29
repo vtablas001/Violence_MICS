@@ -1,0 +1,140 @@
+\subsection{Violencia letal: mejora general y diferencias por género}
+La diapositiva 4 de Infosegura presenta una tasa total de homicidios de 106,3
+por cien mil habitantes en 2015 y de 20,9 en 2020. La proyección rotulada para
+2021 es 20,8. En mujeres, la tasa correspondiente es 17,3 en 2015, 3,8 en
+2020 y 4,9 en la proyección de 2021. La diapositiva 5 informa tasas de
+feminicidio de 2,2 en 2020 y 3,1 en su proyección de 2021. Se preserva la
+condición proyectada del último punto, sin presentarlo como cierre anual.
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[t]{0.49\textwidth}\vspace{0pt}\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\linewidth,height=5.7cm,title={Homicidios: total},
+ xmin=2013,xmax=2021,ymin=0,ymax=120,xtick={2013,2015,2017,2019,2021},
+ xticklabel style={rotate=45,anchor=east},scaled x ticks=false,
+ /pgf/number format/1000 sep={},ylabel={Por cien mil habitantes},
+ tick label style={font=\scriptsize},title style={font=\small},
+ grid=major,grid style={gray!15},filter discard warning=false]
+\addplot[petroleo,thick,mark=*,restrict x to domain=2013:2020]
+ table[x=anio,y=total,col sep=comma]{data/infosegura_homicidios.csv};
+\addplot[petroleo,thick,dashed,mark=o,restrict x to domain=2020:2021]
+ table[x=anio,y=total,col sep=comma]{data/infosegura_homicidios.csv};
+\end{axis}\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\vspace{0pt}\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\linewidth,height=5.7cm,title={Muertes de mujeres},
+ xmin=2013,xmax=2021,ymin=0,ymax=20,xtick={2013,2015,2017,2019,2021},
+ xticklabel style={rotate=45,anchor=east},scaled x ticks=false,
+ /pgf/number format/1000 sep={},ylabel={Por cien mil mujeres},
+ tick label style={font=\scriptsize},title style={font=\small},
+ grid=major,grid style={gray!15},filter discard warning=false,
+ legend style={font=\scriptsize,at={(0.5,-0.45)},anchor=north,draw=none}]
+\addplot[petroleo,thick,mark=*,restrict x to domain=2013:2020]
+ table[x=anio,y=mujeres,col sep=comma]{data/infosegura_homicidios.csv};
+\addlegendentry{Homicidios de mujeres}
+\addplot[ocre,thick,mark=square*,restrict x to domain=2013:2020]
+ table[x=anio,y=feminicidios,col sep=comma]{data/infosegura_homicidios.csv};
+\addlegendentry{Feminicidios}
+\addplot[petroleo,thick,dashed,mark=o,forget plot,restrict x to domain=2020:2021]
+ table[x=anio,y=mujeres,col sep=comma]{data/infosegura_homicidios.csv};
+\addplot[ocre,thick,dashed,mark=square,forget plot,restrict x to domain=2020:2021]
+ table[x=anio,y=feminicidios,col sep=comma]{data/infosegura_homicidios.csv};
+\end{axis}\end{tikzpicture}
+\end{minipage}
+\caption{Violencia letal en Infosegura: tasas y proyecciones, 2013-2021}\label{fig:infosegura_letal}
+\fuente{Presentación, diapositivas 4 y 5; mesas técnicas y DIGESTYC según sus pies. El tramo discontinuo termina en la \textbf{proyección de 2021}. Los paneles usan escalas y poblaciones distintas. El total de homicidios de mujeres incluye feminicidios; las dos series del panel derecho no se suman.}
+\end{figure}
+
+El contraste es relevante para el argumento del artículo: una mejora de la
+tasa nacional no permite asumir una evolución homogénea por género. MICS
+agrega información sobre prácticas y normas que los registros letales no
+describen. La coexistencia documental de disciplina violenta en 2014 y
+reducción de homicidios después de 2015 no demuestra continuidad individual,
+persistencia cuantificada de violencia familiar en 2021 ni efectos de una
+política específica.
+
+La diapositiva 5 también muestra promedios mensuales de denuncias
+intrafamiliares de 96,1, 77,9 y 105,4 para 2019, 2020 y 2021, respectivamente.
+No precisa en la propia lámina el corte de 2021. Se citan como valores de
+esa presentación, sin anualizarlos ni calcular con ellos una variación de
+incidencia familiar. La ecuación \ref{eq:registro} ayuda a explicar por qué
+una denuncia no equivale a una medición exhaustiva de violencia ocurrida.
+
+\subsection{Victimización por delincuencia y exposición territorial}
+La diapositiva 10 presenta victimización en los últimos doce meses de 14,0\,\%
+en 2017, 13,9\,\% en 2018, 10,8\,\% en 2019 y 10,4\,\% en 2021. En este
+último año los valores son 10,7\,\% para hombres y 10,2\,\% para mujeres,
+mientras área urbana y rural registran 12,7\,\% y 6,8\,\%. Se conservan las
+definiciones de la presentación: estas cifras de delincuencia no sustituyen
+la prevalencia de disciplina o violencia de pareja.
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[t]{0.49\textwidth}\vspace{0pt}\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\linewidth,height=5.4cm,title={Por sexo},
+ xmin=2017,xmax=2021,ymin=0,ymax=20,xtick={2017,2018,2019,2021},
+ scaled x ticks=false,/pgf/number format/1000 sep={},ylabel={Porcentaje},
+ grid=major,grid style={gray!15},tick label style={font=\scriptsize},
+ title style={font=\small},legend style={font=\scriptsize,at={(0.5,-0.25)},anchor=north,draw=none}]
+\addplot[petroleo,thick,mark=*] table[x=anio,y=hombres,col sep=comma]{data/infosegura_victimizacion.csv};
+\addlegendentry{Hombres}
+\addplot[ocre,thick,mark=square*] table[x=anio,y=mujeres,col sep=comma]{data/infosegura_victimizacion.csv};
+\addlegendentry{Mujeres}
+\end{axis}\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\vspace{0pt}\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\linewidth,height=5.4cm,title={Por residencia},
+ xmin=2017,xmax=2021,ymin=0,ymax=20,xtick={2017,2018,2019,2021},
+ scaled x ticks=false,/pgf/number format/1000 sep={},ylabel={Porcentaje},
+ grid=major,grid style={gray!15},tick label style={font=\scriptsize},
+ title style={font=\small},legend style={font=\scriptsize,at={(0.5,-0.25)},anchor=north,draw=none}]
+\addplot[petroleo,thick,mark=*] table[x=anio,y=urbana,col sep=comma]{data/infosegura_victimizacion.csv};
+\addlegendentry{Urbana}
+\addplot[ocre,thick,mark=square*] table[x=anio,y=rural,col sep=comma]{data/infosegura_victimizacion.csv};
+\addlegendentry{Rural}
+\end{axis}\end{tikzpicture}
+\end{minipage}
+\caption{Victimización por delincuencia en los últimos doce meses}\label{fig:infosegura_vict}
+\fuente{Infosegura, diapositiva 10, con encuestas de Cultura de Paz según el pie. Años observados: 2017, 2018, 2019 y 2021; no se imputa 2020. La lámina no explicita la edad del universo ni ofrece IC; las diferencias no se presentan como significativas.}
+\end{figure}
+
+La brecha urbana-rural de victimización tiene el mismo signo que la diferencia
+descriptiva de disciplina de MICS y distinto signo que la justificación de
+violencia contra la esposa. Esa observación no es una correlación estimada:
+son años, unidades y experiencias diferentes. Su utilidad consiste en evitar
+que un indicador territorial se convierta en sustituto automático de todos
+los demás y en orientar una agenda de desagregación comparable.
+
+\subsection{Condiciones materiales, prioridades y percepción}
+La diapositiva 7 sitúa economía y seguridad como principal problema del país
+en 46,9\,\% y 26,6\,\% en 2021. En 2019 informa 32,3\,\% y 59,8\,\%.
+La serie incorpora además COVID-19 como categoría en 2021, por lo que el
+cambio de composición debe reconocerse. No se interpreta como una medida
+de ingresos, desempleo o victimización individual.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Contexto de desarrollo y seguridad en la presentación}\label{tab:infosegura_contexto}
+\begin{tabularx}{\textwidth}{@{}Yp{2.5cm}p{2.1cm}Y@{}}\toprule
+Indicador & Período y unidad & Valor & Lectura para el estudio\\\midrule
+Economía, principal problema & 2021; \% & 46,9 & Prioridad declarada, no ingreso observado\\
+Seguridad, principal problema & 2021; \% & 26,6 & No es prevalencia de delitos\\
+Privación por desempleo & 2019-2020; cambio en pp & +10,4 & Variación de un indicador de privación, no tasa de desempleo\\
+Restricciones por inseguridad & 2019-2020; cambio en pp & $-6,8$ & Componente de privaciones; distinto de disciplina familiar\\
+Inseguridad en transporte & 2021; \% reportado & 68,1 & Base por espacio no detallada en la lámina\\
+Inseguridad en comunidad & 2021; \% reportado & 19,9 & Percepción, no hecho delictivo registrado\\\bottomrule
+\end{tabularx}
+\fuente{Infosegura, diapositivas 7, 8 y 12. La base 18+ de uso de espacios del gráfico derecho de la lámina 12 no se atribuye automáticamente al gráfico izquierdo de percepción. Las unidades de las filas no se suman.}
+\end{table}
+
+El aumento del componente de privación por desempleo plantea preguntas sobre
+recursos para la crianza, dependencia económica y acceso a servicios. Estas
+relaciones son hipótesis; la variación de 10,4 puntos no demuestra que el
+desempleo causara las prácticas observadas por MICS siete años antes.
+La presentación también recomienda atender los espacios públicos de mayor
+uso. Su aportación es ampliar la prevención hacia condiciones de acceso y
+movilidad, junto con la protección dentro del hogar.

@@ -1,0 +1,43 @@
+\section{Extracción, procedencia y límites de Infosegura}\label{anexo:infosegura}
+La presentación suministrada se identifica como versión 3.0 de DATACCIÓN
+2021 y contiene 14 diapositivas. El script \var{extract_infosegura.py} lee
+las cachés XML de gráficos nativos, respetando el índice de cada observación,
+y genera seis CSV y un manifiesto JSON. No actualiza vínculos externos, no
+abre los libros Excel privados y no modifica el archivo original.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Trazabilidad de los agregados de Infosegura}\label{tab:traza_infosegura}
+\begin{tabularx}{\textwidth}{@{}p{3.5cm}p{1.4cm}Y@{}}\toprule
+Archivo, prefijo \var{infosegura_} & Lámina & Alcance y restricción\\\midrule
+\var{homicidios.csv} & 4, 5 & Gráficos 3 y 5. Tasas por grupo; 2021 es proyección.\\
+\var{victimizacion.csv} & 10 & Gráficos 16-18. Delincuencia en doce meses; universo etario no explicitado.\\
+\var{preocupaciones.csv} & 7 & Gráfico 11. Se conserva vacío COVID-19 antes de 2021; no se imputa cero.\\
+\var{denuncias.csv} & 5 & Gráfico 4. Promedios mensuales; corte 2021 no documentado en la lámina.\\
+\var{privaciones.csv} & 8 & Gráfico 12. Cambios 2019-2020 en puntos porcentuales.\\
+\var{percepcion.csv} & 12 & Gráfico 21. Transporte y comunidad; no confundir percepción con uso de espacios.\\\bottomrule
+\end{tabularx}
+\end{table}
+
+La huella SHA256 del PPTX y las correspondencias entre láminas y gráficos
+se conservan en \var{data/infosegura_fuente.json}. Los valores de las cachés
+se preservan con su precisión original y el artículo redondea para presentación.
+Las curvas se dibujan con segmentos rectos: no se ajustan modelos ni se
+atribuyen valores observados a años ausentes.
+
+Para repetir la extracción con una copia autorizada de la misma presentación:
+\begin{verbatim}
+python extract_infosegura.py "ruta/presentacion.pptx" \
+  --output-dir data
+\end{verbatim}
+Solo se utiliza la biblioteca estándar de Python. La presentación original
+no se incorpora al repositorio público. Sus agregados permiten documentar
+lo que esta versión muestra, sin certificar la calidad de sus registros
+primarios o la comparabilidad de los factores de expansión entre rondas.
+No se calculan IC propios para esos agregados.
+
+Las cifras de la presentación no se reemplazan con resultados anuales o
+revisiones posteriores a 2021. Las series de migración y revictimización se
+excluyen de la cuantificación por ambigüedad de bases; la serie histórica
+mixta de la lámina 3 tampoco se emplea. Se evita así interpretar series
+auxiliares o valores de gráficos no seleccionados como indicadores del estudio.

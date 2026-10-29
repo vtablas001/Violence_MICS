@@ -1,0 +1,80 @@
+{
+  "source_filename": "Presentación Infosegura ELSV Datacción II - 2021 v.3.0.pptx",
+  "sha256": "7d81a940e6b9f6f7bee15fd14174e0b97b4ffa1d69427b36c8253668d2ddf154",
+  "title": "Analisis Multidimensional de Seguridad Ciudadana. Primer Semestre 2021. El Salvador",
+  "attribution": "PNUD a traves de Infosegura, segun los pies de las diapositivas",
+  "source_year": 2021,
+  "extraction": "XML de caches de graficos nativos; cotejo visual con PowerPoint",
+  "origins": {
+    "infosegura_homicidios.csv": {
+      "slides": [
+        4,
+        5
+      ],
+      "charts": [
+        3,
+        5
+      ],
+      "unit": "tasa por 100000 del grupo correspondiente",
+      "projection_year": 2021
+    },
+    "infosegura_victimizacion.csv": {
+      "slides": [
+        10
+      ],
+      "charts": [
+        16,
+        17,
+        18
+      ],
+      "unit": "porcentaje, delincuencia ultimos 12 meses",
+      "age_universe": "no explicitado en la diapositiva"
+    },
+    "infosegura_preocupaciones.csv": {
+      "slides": [
+        7
+      ],
+      "charts": [
+        11
+      ],
+      "unit": "porcentaje, principal problema del pais",
+      "covid_before_2021": "no consta; no imputar cero"
+    },
+    "infosegura_denuncias.csv": {
+      "slides": [
+        5
+      ],
+      "charts": [
+        4
+      ],
+      "unit": "promedio mensual de denuncias",
+      "cutoff_2021": "no explicitado en la diapositiva"
+    },
+    "infosegura_privaciones.csv": {
+      "slides": [
+        8
+      ],
+      "charts": [
+        12
+      ],
+      "unit": "variacion 2019-2020 en puntos porcentuales, no tasa de desempleo"
+    },
+    "infosegura_percepcion.csv": {
+      "slides": [
+        12
+      ],
+      "charts": [
+        21
+      ],
+      "unit": "porcentaje que declara inseguridad; base de cada espacio no documentada",
+      "warning": "el grafico de uso de espacios de personas 18+ es distinto"
+    }
+  },
+  "limitations": [
+    "No se dispone de libros Excel fuente ni microdatos de Cultura de Paz",
+    "No se actualizan proyecciones con cifras anuales posteriores",
+    "No se usan series auxiliares ni la serie historica mixta de la diapositiva 3",
+    "No se cuantifica migracion o revictimizacion por bases no verificadas",
+    "No se publican enlaces privados a libros externos ni el PPTX original"
+  ]
+}

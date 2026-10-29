@@ -1,23 +1,31 @@
-# Violencia y protección: ENS MICS El Salvador 2014
+# Violencia familiar y seguridad ciudadana: MICS 2014 e Infosegura 2021
 
 Análisis **descriptivo**, reproducible en R, de disciplina infantil, actitudes
 hacia la violencia contra la esposa y primera unión antes de los 15 y 18 años.
 La versión principal del artículo está disponible como
-[PDF de 15 páginas](paper/latex/main.pdf) y como
-[proyecto LaTeX editable](paper/latex/README.md), con cinco figuras, once
-cuadros y cinco anexos. Se conserva el
+[PDF de 20 páginas](paper/latex/main.pdf) y como
+[proyecto LaTeX editable](paper/latex/README.md), con siete figuras, quince
+cuadros y seis anexos. Su fecha de referencia es **noviembre de 2021** y
+articula MICS con el análisis multidimensional de Infosegura. Se conserva el
 [borrador inicial en Markdown](paper/manuscrito_noviembre_2019.md).
 
 Los gráficos empíricos del artículo LaTeX presentan cifras **secundarias del
-informe oficial**, cotejadas con sus tablas y páginas. No son reestimaciones
+informe MICS y de la presentación Infosegura**, cotejadas con sus tablas,
+páginas o diapositivas. No son reestimaciones
 propias. El gráfico de sensibilidad es una ilustración matemática identificada.
 
 **Estado:** código probado con archivos SPSS artificiales. No se dispuso de los
-microdatos reales en esta entrega y no se calcularon prevalencias de El Salvador.
+microdatos reales en esta entrega y no se reestimaron prevalencias con ellos.
 El manuscrito es un **borrador retrospectivo**, preparado el 29 de octubre de
-2026 con fecha editorial de referencia **noviembre de 2019**. No es una
-publicación efectuada en 2019. Las dependencias de software corresponden a la
-implementación actual, no al entorno informático de 2019.
+2026 con fecha editorial de referencia **noviembre de 2021**. No es una
+publicación efectuada en 2021. Las dependencias de software corresponden a la
+implementación actual, no al entorno informático de 2021.
+
+La integración de Infosegura añade tasas de homicidio y feminicidio,
+victimización, preocupaciones económicas y privaciones. Conserva las
+proyecciones de 2021 como proyecciones, sin unir esos agregados a las personas
+de MICS ni atribuirles efectos causales. Ver
+[procedencia y límites](docs/infosegura.md).
 
 ## Qué corrige
 
@@ -82,6 +90,12 @@ Si se decide usar versiones actuales sin restaurar el entorno fijado:
 Rscript scripts/install.R
 Rscript tests/run_tests.R
 Rscript scripts/run_analysis.R data/raw results/real
+```
+
+Para verificar y tabular únicamente los agregados secundarios de Infosegura:
+
+```sh
+Rscript -e 'renv::load(); source("scripts/run_infosegura.R")' results/infosegura
 ```
 
 La carpeta de salida debe ser nueva o estar vacía. Un error de validación
