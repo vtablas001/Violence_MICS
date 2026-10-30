@@ -1,0 +1,42 @@
+{
+  "corte_editorial": "2021-11",
+  "verificacion": "2026-10-29",
+  "envcm": {
+    "autor": "DIGESTYC, Ministerio de Economia",
+    "titulo": "Encuesta Nacional de Violencia Contra las Mujeres 2017",
+    "fecha_editorial": "2018-05",
+    "url": "https://onec.bcr.gob.sv/observatorio.genero/docs/ENVCM%2017.pdf",
+    "sha256": "96d7697abd2b96e0ac300ab365d159248bf0bba7947d7741a9fca6d5ea299d8c",
+    "localizadores": "Tablas 46 y 47; paginas impresas 83 y 84; paginas PDF 96 y 97",
+    "alcance": "Mujeres de 15 anios o mas; ambitos publico y privado; no solo violencia domestica",
+    "csv": "envcm2017_contexto.csv",
+    "intervalos": "IC95 transcritos del informe; no calculados por este estudio"
+  },
+  "literatura": {
+    "autores": "Guedes, Bott, Garcia-Moreno y Colombini",
+    "anio": 2016,
+    "doi": "10.3402/gha.v9.31516",
+    "url_texto": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4916258/",
+    "diseno": "Revision narrativa global; no estimacion causal para El Salvador"
+  },
+  "pnud_marzo": {
+    "fecha": "2021-03-27",
+    "url": "https://www.undp.org/es/el-salvador/noticias/analisis-sobre-seguridad-ciudadana-en-dataccion",
+    "uso": "Contexto de cuarentena y movilidad; evaluacion externa, sin coeficientes propios"
+  },
+  "pnud_octubre": {
+    "fecha": "2021-10-15",
+    "url": "https://www.undp.org/es/el-salvador/noticias/analisis-multidimensional-de-seguridad-ciudadana",
+    "uso": "Proyeccion de tasa total 20.8 y lectura por sexo; no cierre anual ni totales de denuncias inferidos"
+  },
+  "fecha_informe_mics": {
+    "fecha_editorial": "2016-12",
+    "url": "https://www.unicef.org/elsalvador/informes/encuesta-nacional-de-salud-mics-2014"
+  },
+  "criterios": [
+    "No agregar cifras de cierre de 2021 o encuestas levantadas en diciembre a un paper de noviembre de 2021",
+    "No presentar diferencias entre prevalencia de vida y anual como un descenso temporal",
+    "No confundir actitudes MICS con experiencias de violencia",
+    "No convertir promedios mensuales de denuncias en totales anuales"
+  ]
+}

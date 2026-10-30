@@ -20,7 +20,7 @@ Integra ENS MICS 2014 y las series de seguridad ciudadana de Infosegura (2021).
   primera unión; comparación de cohortes; violencia letal; victimización;
   prioridades del país; percepción por espacio; veinte cambios de privación;
   sensibilidad a faltantes.
-- Quince cuadros, incluido el diccionario extenso y una plantilla de resultados
+- Dieciséis cuadros, incluido el diccionario extenso y una plantilla de resultados
   propios pendientes.
 - Seis anexos: diccionario, trazabilidad MICS, sensibilidad, replicación,
   correcciones y procedencia de las series de Infosegura.
@@ -35,6 +35,17 @@ CP.10 ni el texto introductorio incorrecto de CP.5.
 
 Fuente original: [informe oficial de UNICEF](https://www.unicef.org/elsalvador/media/1261/file/mics_final.pdf).
 El anexo de trazabilidad identifica cada conjunto y su página impresa.
+
+## Contexto complementario verificado
+
+La ENVCM 2017 añade dos cifras nacionales de experiencias de violencia y sus
+intervalos publicados (tablas 46-47 del informe de DIGESTYC, publicado en mayo
+de 2018). `data/envcm2017_contexto.csv` conserva valores y localizadores;
+`data/contexto_fuentes.json` identifica fuentes y huellas de verificación.
+El paper también incorpora Guedes et al. (2016) y notas institucionales de
+PNUD de marzo y octubre de 2021. Se mantiene el corte editorial de noviembre
+de 2021: no se usan resultados de diciembre ni cierres anuales conocidos
+después. Las cifras de experiencias, opiniones y delitos no se equiparan.
 
 ## Integración de Infosegura
 
@@ -100,7 +111,7 @@ Los paquetes de TeX se instalan mediante la distribución del usuario si faltan.
 
 ## Verificación de esta edición
 
-El PDF entregado tiene **26 páginas**, incluidas las referencias y los seis
+El PDF entregado tiene **27 páginas**, incluidas las referencias y los seis
 anexos. Esta ampliación se compiló con pdfLaTeX (MiKTeX 26.2).
 Se comprobaron referencias cruzadas, ausencia de cajas
 desbordadas en el registro y la representación de todas las páginas. La

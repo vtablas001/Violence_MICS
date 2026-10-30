@@ -5,8 +5,8 @@
 Análisis **descriptivo**, reproducible en R, de disciplina infantil, actitudes
 hacia la violencia contra la esposa y primera unión antes de los 15 y 18 años.
 La versión principal del artículo está disponible como
-[PDF de 26 páginas](paper/latex/main.pdf) y como
-[proyecto LaTeX editable](paper/latex/README.md), con trece figuras, quince
+[PDF de 27 páginas](paper/latex/main.pdf) y como
+[proyecto LaTeX editable](paper/latex/README.md), con trece figuras, dieciséis
 cuadros y seis anexos. Su fecha de referencia es **noviembre de 2021** y
 articula MICS con el análisis multidimensional de Infosegura. Se conserva el
 [borrador inicial en Markdown](paper/manuscrito_noviembre_2019.md).
@@ -18,6 +18,10 @@ edad y riqueza, cohortes de primera unión, prioridades, percepción y
 privaciones. Incluye una tabla del cambio observado de cuatro tasas de
 violencia letal entre 2015 y 2020. Los cálculos se regeneran con R base desde
 la carpeta `paper/latex`: `Rscript --vanilla rebuild_analysis.R`.
+
+El contexto complementario incorpora la ENVCM 2017, literatura sobre las
+intersecciones de violencia contra mujeres y niñez, y el análisis de la
+pandemia disponible en 2021. [Fuentes y criterios de integración](docs/contexto_fuentes.md).
 
 Los gráficos empíricos del artículo LaTeX presentan cifras **secundarias del
 informe MICS y de las series de Infosegura**, cotejadas con sus tablas
