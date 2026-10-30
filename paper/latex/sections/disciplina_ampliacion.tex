@@ -1,0 +1,88 @@
+\subsubsection{Coexistencia de prácticas y alcance de la prevención}
+Las prevalencias marginales permiten una descomposición adicional. Si $P$
+representa agresión psicológica y $F$ castigo físico, la definición de
+cualquier disciplina violenta corresponde a $P\cup F$. Por inclusión y
+exclusión, con el mismo denominador de CP.5:
+\begin{equation}
+ \Pr(P\cap F)=\Pr(P)+\Pr(F)-\Pr(P\cup F)
+ =0{,}322+0{,}394-0{,}520=0{,}196.
+ \label{eq:solapamiento}
+\end{equation}
+Así, aproximadamente 19,6\,\% experimentó ambas formas; 12,6\,\% solo agresión
+psicológica y 19,8\,\% solo castigo físico. Son resultados algebraicos sobre
+cifras publicadas y redondeadas, no una nueva tabulación de personas.
+El redondeo de cada marginal a una décima puede desplazar la intersección
+hasta 0,15 puntos porcentuales; esa cota aritmética no es un IC muestral.
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.83\textwidth,height=5.1cm,xbar,bar width=12pt,
+ xmin=0,xmax=55,xtick={0,10,20,30,40,50},
+ ytick={0,1,2,3},yticklabels={Solo psicológica,Ambas formas,Solo física,Ninguna de las dos},
+ ymin=-0.6,ymax=3.6,xlabel={Porcentaje de niños de 1 a 14 años},
+ xmajorgrids=true,grid style={gray!15},axis x line*=bottom,axis y line*=left,
+ nodes near coords,nodes near coords style={font=\small},tick label style={font=\small}]
+\addplot[fill=petroleo,draw=none] table[x=porcentaje,y=pos,col sep=comma]{data/derivada_solapamiento.csv};
+\end{axis}\end{tikzpicture}
+\caption{Descomposición de la disciplina: categorías excluyentes}\label{fig:solapamiento}
+\fuente{Cálculos por inclusión-exclusión a partir de CP.5, p. 282. ``Ninguna de las dos'' es el complemento de cualquier disciplina violenta; no equivale a ``solo disciplina no violenta'' (35,5\,\%). No permite identificar qué prácticas específicas coexistieron.}
+\end{figure}
+
+Entre quienes experimentaron alguna disciplina violenta, la fracción
+calculada que reúne ambas formas es 37,7\,\% ($19{,}6/52{,}0$). Esto orienta
+una prevención que aborde simultáneamente el trato verbal y el castigo
+corporal. Aun cuando se eliminara una práctica específica, la otra podría
+mantener la exposición del niño a disciplina violenta. La resta de 48,0\,\%
+sin ninguna de estas formas y 35,5\,\% con solo métodos no violentos deja
+12,5 puntos: no se atribuye ese residuo a una conducta concreta, pues puede
+comprender ausencia de métodos preguntados y categorías omitidas.
+
+\subsubsection{Edad y riqueza: patrones distintos de exposición}
+La figura \ref{fig:disciplina_edad_riqueza} desagrega los tabulados oficiales.
+La prevalencia de cualquier disciplina violenta alcanza 62,0\,\% a los 3--4
+años, frente a 48,4\,\% a los 10--14. El castigo físico pasa de 54,6\,\% a
+29,4\,\% entre esos grupos, una diferencia de 25,2 puntos. La agresión
+psicológica presenta otro perfil: 20,5\,\% a los 1--2 años y 37,4\,\% a los
+10--14, 16,9 puntos más. El menor castigo físico en edades mayores no
+equivale, por tanto, a desaparición de prácticas violentas.
+
+\begin{figure}[htbp]\centering
+\begin{minipage}[t]{0.49\textwidth}\vspace{0pt}\centering
+\begin{tikzpicture}\begin{axis}[width=0.94\linewidth,height=5.6cm,
+ title={Edad del niño},xmin=-0.2,xmax=3.2,ymin=0,ymax=70,
+ xtick={0,1,2,3},xticklabels={1--2,3--4,5--9,10--14},
+ xlabel={Años},ylabel={Porcentaje},tick label style={font=\scriptsize},
+ title style={font=\small},grid=major,grid style={gray!15}]
+\addplot[petroleo,thick,mark=*] table[x=pos,y=violenta,col sep=comma]{data/disciplina_edad.csv};
+\addplot[ocre,thick,mark=square*] table[x=pos,y=fisica,col sep=comma]{data/disciplina_edad.csv};
+\addplot[gris,thick,dashed,mark=triangle*] table[x=pos,y=psicologica,col sep=comma]{data/disciplina_edad.csv};
+\end{axis}\end{tikzpicture}\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}\vspace{0pt}\centering
+\begin{tikzpicture}\begin{axis}[width=0.94\linewidth,height=5.6cm,
+ title={Quintil de riqueza},xmin=0.8,xmax=5.2,ymin=0,ymax=70,
+ xtick={1,2,3,4,5},xticklabels={Q1,Q2,Q3,Q4,Q5},
+ xlabel={Q1: más pobre; Q5: más rico},tick label style={font=\scriptsize},
+ label style={font=\small},title style={font=\small},grid=major,grid style={gray!15}]
+\addplot[petroleo,thick,mark=*] table[x=pos,y=violenta,col sep=comma]{data/disciplina_riqueza.csv};
+\addplot[ocre,thick,mark=square*] table[x=pos,y=fisica,col sep=comma]{data/disciplina_riqueza.csv};
+\addplot[gris,thick,dashed,mark=triangle*] table[x=pos,y=psicologica,col sep=comma]{data/disciplina_riqueza.csv};
+\end{axis}\end{tikzpicture}\end{minipage}
+\caption{Disciplina infantil por edad y quintil de riqueza}\label{fig:disciplina_edad_riqueza}
+\fuente{CP.5, pp. 282--283. Azul con círculos: cualquier violenta; ocre con cuadrados: física; gris discontinuo con triángulos: psicológica. Mismo eje vertical en ambos paneles. Diferencias descriptivas sin IC propios; categorías solapadas.}
+\end{figure}
+
+Por riqueza no aparece una disminución monotónica de la disciplina violenta:
+47,7\,\% en Q1, 52,3\,\% en Q2, 53,5\,\% en Q3, 54,8\,\% en Q4 y 53,3\,\%
+en Q5. La distancia entre extremos es 5,6 puntos a favor de una mayor
+declaración en Q5. El castigo físico oscila entre 37,3\,\% y 41,4\,\% en los
+cinco quintiles. Esta distribución respalda la cobertura de todos los
+estratos en prevención, junto con apoyos materiales focalizados. El índice
+de riqueza mide posición relativa en activos y condiciones del hogar; no
+es ingreso ni mide por sí solo recursos de crianza, normas o estrés.
+
+Los perfiles de edad son comparaciones entre niños distintos observados en
+2014, no cambios seguidos en un mismo niño. Las diferencias por riqueza
+tampoco identifican su efecto causal: requieren considerar composición por
+edad, informante, estructura familiar y posible declaración diferencial.
+Sin microdatos y varianza de diseño, no se ordenan grupos por significación
+ni se afirma que los patrones resistan un ajuste multivariado.

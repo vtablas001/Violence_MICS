@@ -16,14 +16,17 @@ stopifnot(identical(h$anio, as.numeric(2013:2021)),
           all(v$total >= 0 & v$total <= 100),
           all(is.na(concerns$covid19[concerns$anio != 2021])))
 dir.create(out, recursive = TRUE, showWarnings = FALSE)
-point <- function(year, field) h[[field]][h$anio == year]
+fields <- c("total", "hombres", "mujeres", "feminicidios")
+initial <- as.numeric(h[h$anio == 2015, fields])
+final <- as.numeric(h[h$anio == 2020, fields])
 changes <- dplyr::tibble(
-  indicador = "homicidios_total", inicio = 2015, fin = 2020,
-  valor_inicial = point(2015, "total"), valor_final = point(2020, "total"),
+  indicador = c("homicidios_total", "homicidios_hombres", "homicidios_mujeres",
+                "feminicidios"), inicio = 2015, fin = 2020,
+  valor_inicial = initial, valor_final = final,
   cambio_tasa = valor_final - valor_inicial,
   cambio_porcentual = 100 * (valor_final / valor_inicial - 1),
-  unidad = "tasa por 100000 habitantes; ambos puntos no proyectados",
-  fuente = "Infosegura 2021, diapositiva 4")
+  unidad = "tasa por 100000 habitantes del grupo; puntos no proyectados",
+  fuente = "Infosegura 2021, diapositivas 4 y 5")
 gaps <- v |> dplyr::mutate(brecha_sexo_pp = hombres - mujeres,
   brecha_area_pp = urbana - rural,
   fuente = "Infosegura 2021, diapositiva 10; sin IC propios")

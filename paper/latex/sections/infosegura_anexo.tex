@@ -19,25 +19,17 @@ Archivo, prefijo \var{infosegura_} & Lámina & Alcance y restricción\\\midrule
 \end{tabularx}
 \end{table}
 
-La huella SHA256 del PPTX y las correspondencias entre láminas y gráficos
-se conservan en \var{data/infosegura_fuente.json}. Los valores de las cachés
-se preservan con su precisión original y el artículo redondea para presentación.
-Las curvas se dibujan con segmentos rectos: no se ajustan modelos ni se
-atribuyen valores observados a años ausentes.
+La huella SHA256 y los localizadores constan en
+\var{data/infosegura_fuente.json}. Los CSV preservan la precisión original;
+las figuras redondean, conectan observaciones y no imputan años ausentes.
 
 Para repetir la extracción con una copia autorizada de la misma presentación:
 \begin{verbatim}
 python extract_infosegura.py "ruta/presentacion.pptx" \
   --output-dir data
 \end{verbatim}
-Solo se utiliza la biblioteca estándar de Python. La presentación original
-no se incorpora al repositorio público. Sus agregados permiten documentar
-lo que esta versión muestra, sin certificar la calidad de sus registros
-primarios o la comparabilidad de los factores de expansión entre rondas.
-No se calculan IC propios para esos agregados.
-
-Las cifras de la presentación no se reemplazan con resultados anuales o
-revisiones posteriores a 2021. Las series de migración y revictimización se
-excluyen de la cuantificación por ambigüedad de bases; la serie histórica
-mixta de la lámina 3 tampoco se emplea. Se evita así interpretar series
-auxiliares o valores de gráficos no seleccionados como indicadores del estudio.
+La extracción usa Python estándar y no redistribuye el PPTX. Se conserva su
+versión de 2021, sin revisiones posteriores. Se excluyen migración,
+revictimización y la serie mixta de la lámina 3 por bases ambiguas o series
+auxiliares. No se certifican registros primarios o comparabilidad de
+ponderadores entre rondas, ni se calculan IC propios.

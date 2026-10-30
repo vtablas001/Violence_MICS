@@ -42,5 +42,13 @@ en 2014. No se producen intervalos de confianza a partir de cifras publicadas.
 
 El script `scripts/run_infosegura.R` comprueba años, proyecciones y rangos,
 exporta brechas descriptivas de victimización y calcula el cambio de la tasa
-general de homicidio entre 2015 y 2020. Mantiene aparte las proyecciones de
+de homicidio total, hombres, mujeres y feminicidios entre 2015 y 2020. Mantiene aparte las proyecciones de
 2021. Sus salidas permanecen en `results/`, excluido de Git.
+
+El paper amplía esos agregados con gráficos de prioridades, percepción por
+espacio y los veinte cambios de privación. `paper/latex/rebuild_analysis.R`
+reproduce la tabla de cambios de tasas, las brechas de victimización y los
+contrastes citados; usa únicamente R base. Las fuentes permanecen intactas y
+las salidas en `paper/latex/data/derivada_*` son aritmética reproducible.
+La descomposición de disciplina por inclusión-exclusión se calcula desde
+porcentajes MICS redondeados; no es una nueva tabulación de personas.

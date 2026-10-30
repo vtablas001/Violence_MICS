@@ -1,0 +1,37 @@
+\subsubsection{Comparación de cohortes y edad de inicio}
+La figura \ref{fig:union_cohortes} muestra todos los grupos quinquenales de
+20--49 años. Para unión antes de 18, la diferencia entre mujeres de 20--24 y
+45--49 es de $-7{,}2$ puntos porcentuales (25,5 frente a 32,7\,\%). Sin
+embargo, el grupo de 25--29 presenta 22,8\,\%, por debajo del de 20--24,
+mientras el de 30--34 registra 33,2\,\%. La secuencia no justifica describir
+un descenso uniforme de una cohorte a otra.
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}\begin{axis}[width=0.85\textwidth,height=5.8cm,
+ xmin=-0.2,xmax=5.2,ymin=0,ymax=40,ytick={0,10,20,30,40},
+ xtick={0,1,2,3,4,5},xticklabels={20--24,25--29,30--34,35--39,40--44,45--49},
+ xlabel={Edad actual de las mujeres en 2014},ylabel={Porcentaje},
+ grid=major,grid style={gray!15},tick label style={font=\small},
+ legend style={at={(0.5,-0.27)},anchor=north,legend columns=2,column sep=6pt,draw=none,font=\small}]
+\addplot[petroleo,thick,mark=*] table[x=pos,y=antes18,col sep=comma]{data/union_cohortes.csv};
+\addlegendentry{Antes de 18 años}
+\addplot[ocre,thick,mark=square*] table[x=pos,y=antes15,col sep=comma]{data/union_cohortes.csv};
+\addlegendentry{Antes de 15 años}
+\end{axis}\end{tikzpicture}
+\caption{Primera unión temprana por cohorte de edad actual}\label{fig:union_cohortes}
+\fuente{CP.7, p. 288. Todas las mujeres de cada grupo, incluidas nunca unidas. Los segmentos conectan grupos de edad, no años calendario. Antes de 15 es subconjunto de antes de 18. Sin IC propios.}
+\end{figure}
+
+En la cohorte principal de 20--24, la diferencia entre los umbrales es 19,7
+puntos: corresponde a primeras uniones desde los 15 hasta antes de los 18
+años. Aproximadamente 77,3\,\% de las primeras uniones anteriores a 18 se
+inició en ese intervalo ($19{,}7/25{,}5$), una razón calculada con porcentajes
+redondeados. El resultado complementa la atención a inicios antes de 15 con
+acciones de permanencia escolar, autonomía y acceso a protección durante
+toda la adolescencia. No mide coerción ni consecuencias posteriores.
+
+Los contrastes entre cohortes pueden reflejar cambios históricos, pero
+también diferencias de recuerdo, supervivencia y migración. Una encuesta
+transversal no separa por sí sola efectos de edad, período y cohorte. El
+patrón motiva reconstruir calendarios de primera unión y comparar rondas
+compatibles antes de atribuir una variación a reformas legales o programas.

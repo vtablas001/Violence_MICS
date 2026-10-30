@@ -15,15 +15,18 @@ Integra ENS MICS 2014 y la presentación Infosegura DATACCIÓN 2021 suministrada
 
 ## Contenido y evidencia
 
-- Siete figuras: arquitectura de archivos; disciplina; diez escenarios de
-  actitudes; primera unión; violencia letal; victimización; sensibilidad.
+- Trece figuras: arquitectura de archivos; disciplina nacional; coexistencia
+  de prácticas; disciplina por edad y riqueza; diez escenarios de actitudes;
+  primera unión; comparación de cohortes; violencia letal; victimización;
+  prioridades del país; percepción por espacio; veinte cambios de privación;
+  sensibilidad a faltantes.
 - Quince cuadros, incluido el diccionario extenso y una plantilla de resultados
   propios pendientes.
 - Seis anexos: diccionario, trazabilidad MICS, sensibilidad, replicación,
   correcciones y extracción de Infosegura.
 
-Tres gráficos presentan **cifras secundarias publicadas** del informe oficial:
-CP.5 p.282, CP.10 p.296 y CP.7 p.288. Se verificaron las celdas visualmente.
+Los gráficos MICS presentan **cifras secundarias publicadas** del informe oficial:
+CP.5 pp.282-283, CP.10 p.296 y CP.7 p.288. Se verificaron las celdas visualmente.
 No son reestimaciones propias y no contienen IC inventados. La figura de
 sensibilidad es una identidad matemática bajo un ejemplo hipotético explícito.
 El diagrama de archivos es metodológico. La reestimación con microdatos sigue
@@ -60,6 +63,24 @@ La extracción requiere solo la biblioteca estándar de Python. El repositorio
 incluye `scripts/run_infosegura.R` para verificar los agregados y exportar
 contrastes descriptivos sin mezclar registros individuales de MICS.
 
+## Reproducir los nuevos contrastes
+
+Desde esta carpeta, con R base (sin paquetes adicionales):
+
+```sh
+Rscript --vanilla rebuild_analysis.R
+```
+
+El script conserva los CSV fuente y regenera `data/derivada_*`: partición
+de disciplina por inclusión-exclusión, cambios de cuatro tasas de violencia
+letal en 2015-2020, brechas de victimización y contrastes citados en el texto.
+También genera las filas LaTeX del cuadro de cambios y las coordenadas de
+privaciones. Comprueba identidades, rangos y exclusión de proyecciones.
+Los tres CSV nuevos de edad, riqueza y cohortes identifican tabla y página.
+La intersección de prácticas es un cálculo desde marginales compatibles;
+no se aplica esa operación al compuesto de diez actitudes, no identificado
+por sus porcentajes individuales.
+
 ## Compilación
 
 Se puede importar esta carpeta en Overleaf, abrirla en el editor LaTeX de Codex,
@@ -86,14 +107,16 @@ Los paquetes de TeX se instalan mediante la distribución del usuario si faltan.
 
 ## Verificación de esta edición
 
-El PDF entregado tiene **20 páginas**, incluidas las referencias y los seis
-anexos. Se compiló con pdfLaTeX (MiKTeX 26.2) y también con el compilador del
-editor de Codex. Se comprobaron referencias cruzadas, ausencia de cajas
+El PDF entregado tiene **25 páginas**, incluidas las referencias y los seis
+anexos. Esta ampliación se compiló con pdfLaTeX (MiKTeX 26.2).
+Se comprobaron referencias cruzadas, ausencia de cajas
 desbordadas en el registro y la representación de todas las páginas. La
 verificación independiente con `pypdf` confirmó el máximo de 27 páginas y la
 ausencia de la nota introductoria eliminada. Fecha de revisión: 29-10-2026.
 
 Los porcentajes usan punto decimal en CSV por compatibilidad de lectura y
 coma decimal en el texto. Los CSV contienen agregados secundarios y no
-permiten reconstruir personas. No deben sumarse marginales para construir
-compuestos de disciplina o de actitudes.
+permiten reconstruir personas. No deben sumarse marginales como si fueran
+categorías excluyentes. La descomposición de disciplina usa explícitamente
+la unión publicada de ambas formas; las actitudes no ofrecen esa misma
+identidad para el compuesto ampliado.

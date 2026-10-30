@@ -441,7 +441,7 @@ El informe contiene algunas inconsistencias editoriales: el texto introductorio
 de CP.5 se refiere a trabajo infantil aunque su encabezado y columnas son de
 disciplina; además, ciertas filas departamentales de CP.10 muestran valores
 que no son coherentes con sus encabezados. Esta edición emplea únicamente
-celdas nacionales, de sexo, área o cohorte visualmente identificables; no
+celdas nacionales, de sexo, área, edad, riqueza o cohorte visualmente identificables; no
 reproduce las filas departamentales problemáticas. Una réplica con microdatos
 deberá aclarar esas discrepancias antes de ampliar la comparación.
 
@@ -490,6 +490,8 @@ Son restas descriptivas de celdas redondeadas, no contrastes inferenciales.
 Estos datos tampoco autorizan a concluir que el área de residencia produzca
 la violencia: composición de los hogares, declaración y otros factores
 podrían contribuir a la diferencia.
+
+\input{sections/disciplina_ampliacion}
 
 \subsection{Justificación declarada de la violencia}
 La tabla CP.10 informa 7,7\,\% de justificación en al menos uno de los primeros
@@ -579,6 +581,8 @@ la proporción de inicios tempranos \emph{entre quienes se unieron}, que no es
 la prevalencia de unión temprana en toda la cohorte. El programa conserva esa
 distinción y comprueba coherencia con edad actual.
 
+\input{sections/union_ampliacion}
+
 \input{sections/infosegura_resultados}
 
 \subsection{Hallazgos de la auditoría y ejecución pendiente}
@@ -596,19 +600,13 @@ dependencias. Estas comprobaciones corresponden a la implementación actual,
 no a una ejecución histórica en 2021. No sustituyen la revisión de los
 microdatos originales y de sus etiquetas.
 
-\begin{table}[htbp]
-\centering\small
-\caption{Estado de la evidencia y de la replicación}\label{tab:estado}
-\begin{tabularx}{\textwidth}{@{}YYp{4.0cm}@{}}\toprule
-Producto & Qué se ha realizado & Qué falta\\\midrule
-Cuestionarios y códigos & Cotejo documental y reglas explícitas & Contrastar distribución en SAV del usuario\\
-Gráficos de este artículo & Transcripción verificada del informe & Ningún IC propio calculado\\
-Programa R & Pruebas con SPSS artificial y entorno fijado & Ejecutar microdatos autorizados\\
-Prevalencias propias & Diseño y exportaciones preparados & Estimar puntos, EE, IC y faltantes\\
-Réplica oficial & Referencias CP.5, CP.7 y CP.10 identificadas & Armonizar no respuesta y edades derivadas\\\bottomrule
-\end{tabularx}
-\fuente{Registro de trabajo del repositorio. ``Pendiente'' no implica un resultado nulo ni un fallo de significación.}
-\end{table}
+La ampliación descriptiva se reproduce con \var{rebuild_analysis.R}: verifica
+identidades de conjuntos, umbrales de edad y exclusión de proyecciones de los
+contrastes observados; exporta las diferencias y genera las filas del cuadro
+\ref{tab:cambio_letal}. No sustituye la estimación propia con SAV, cuya
+plantilla y controles se conservan en los anexos. La descomposición y los
+contrastes añadidos son aritmética de agregados secundarios; no producen
+errores estándar ni identifican efectos causales.
 
 \FloatBarrier
 \section{Discusión}
@@ -752,7 +750,7 @@ Ginebra: OMS.
 \href{https://www.who.int/publications/i/item/inspire-seven-strategies-for-ending-violence-against-children}{Publicación oficial}.
 \end{thebibliography}
 
-\clearpage
+\FloatBarrier
 \appendix
 \section{Diccionario mínimo y reglas de validación}\label{anexo:diccionario}
 Los nombres se limpian a minúsculas al leer los archivos. El cuadro conserva
@@ -800,6 +798,9 @@ Archivo o elemento & Valores porcentuales y dominio & Localizador\\\midrule
 \var{disciplina.csv} & 35,5; 32,2; 39,4; 3,0; 52,0. Niños 1-14, total nacional & CP.5, p. 282; PDF 284\\
 \var{actitudes.csv} & A-J: 1,6; 5,2; 2,5; 1,8; 2,0; 5,6; 2,4; 0,7; 1,3; 1,3. Mujeres 15-49 & CP.10, p. 296; PDF 298\\
 \var{union.csv} & 5,8 y 25,5; primera unión antes de 15 y 18, mujeres 20-24 & CP.7, p. 288; PDF 290\\
+\var{disciplina_}\newline\var{edad.csv} & Grupos 1-2, 3-4, 5-9 y 10-14; cinco métodos & CP.5, p. 282; PDF 284\\
+\var{disciplina_}\newline\var{riqueza.csv} & Cinco quintiles; cinco métodos de disciplina & CP.5, p. 283; PDF 285\\
+\var{union_}\newline\var{cohortes.csv} & Grupos quinquenales 20-49; antes de 15 y de 18 & CP.7, p. 288; PDF 290\\
 Cuadro \ref{tab:discgrupo} & Filas Total, Masculino, Femenino, Urbana y Rural & CP.5, p. 282\\
 Cuadro \ref{tab:actgrupos} & Compuesto A-E: Total, Urbana, Rural y 20-24 & CP.10, p. 296\\
 Cuadro \ref{tab:union} & Totales 15-49 y 20-49; fila 20-24 & CP.7, pp. 287-288\\\bottomrule
@@ -817,6 +818,10 @@ El salto de línea divide visualmente una sola cadena hexadecimal. No se
 reconstruyen tamaños sin ponderar a partir de las bases ponderadas publicadas
 ni se fabrican intervalos. Las diferencias mencionadas en el texto son restas
 de porcentajes redondeados y se identifican como tales.
+La figura \ref{fig:solapamiento} deriva categorías excluyentes de tres
+marginales nacionales, según la ecuación \ref{eq:solapamiento}; no añade una
+fuente de microdatos. El script \var{rebuild_analysis.R} reproduce ese
+cálculo y los contrastes de los agregados, preservando los CSV de origen.
 
 \section{Sensibilidad a desconocidos: ejemplo analítico}
 Si la fracción ponderada desconocida es $m$ y la proporción entre casos
@@ -885,10 +890,11 @@ salida de auditoría identifica filas del diseño, UPM, estratos, estratos con
 una UPM y rango de pesos. Las huellas de archivos y la información de sesión
 permiten identificar la versión local usada.
 
+\noindent\begin{minipage}{\textwidth}
 \section{Correcciones y criterios de lectura}
-\begin{table}[htbp]
+\begin{center}
 \centering\small
-\caption{Correcciones que cambian el significado del análisis}\label{tab:correcciones}
+\captionof{table}{Correcciones que cambian el significado del análisis}\label{tab:correcciones}
 \begin{tabularx}{\textwidth}{@{}YY@{}}\toprule
 Riesgo de interpretación & Regla adoptada\\\midrule
 Usar MA5=2 como nunca unida & Nunca unida requiere MA1=3 y MA5=3\\
@@ -900,7 +906,8 @@ Sumar los diez porcentajes DV & Construir unión de eventos en microdatos\\
 Presentar no sabe como no & Conservar desconocidos y sus denominadores\\
 Leer diferencias de porcentajes como efectos & Mantener interpretación descriptiva e incertidumbre\\\bottomrule
 \end{tabularx}
-\end{table}
+\end{center}
+\end{minipage}
 
 Los gráficos oficiales, la ilustración matemática y las estimaciones propias
 pendientes mantienen identificaciones separadas para facilitar su lectura
