@@ -103,11 +103,13 @@ python check_pdf.py main.pdf
 
 El límite de **27 páginas incluye título, resumen, referencias, gráficos,
 tabulados y anexos**. Al editar el contenido debe repetirse la comprobación.
+Las referencias comienzan siempre en una página nueva: el preámbulo fija
+esta regla para el entorno bibliográfico y `check_pdf.py` la comprueba.
 Los paquetes de TeX se instalan mediante la distribución del usuario si faltan.
 
 ## Verificación de esta edición
 
-El PDF entregado tiene **25 páginas**, incluidas las referencias y los seis
+El PDF entregado tiene **26 páginas**, incluidas las referencias y los seis
 anexos. Esta ampliación se compiló con pdfLaTeX (MiKTeX 26.2).
 Se comprobaron referencias cruzadas, ausencia de cajas
 desbordadas en el registro y la representación de todas las páginas. La

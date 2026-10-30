@@ -23,11 +23,13 @@ La huella SHA256 y los localizadores constan en
 \var{data/infosegura_fuente.json}. Los CSV preservan la precisión original;
 las figuras redondean, conectan observaciones y no imputan años ausentes.
 
+\begin{samepage}
 Para repetir la extracción con una copia autorizada de la misma presentación:
 \begin{verbatim}
 python extract_infosegura.py "ruta/presentacion.pptx" \
   --output-dir data
 \end{verbatim}
+\end{samepage}
 La extracción usa Python estándar y no redistribuye el PPTX. Se conserva su
 versión de 2021, sin revisiones posteriores. Se excluyen migración,
 revictimización y la serie mixta de la lámina 3 por bases ambiguas o series

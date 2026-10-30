@@ -19,6 +19,8 @@
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{hyperref}
+% Regla editorial: la bibliografía siempre empieza en una página nueva.
+\AddToHook{env/thebibliography/before}{\clearpage}
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=teal,
  pdftitle={Violencia familiar y seguridad ciudadana en El Salvador: MICS e Infosegura},
  pdfauthor={}}
@@ -750,7 +752,7 @@ Ginebra: OMS.
 \href{https://www.who.int/publications/i/item/inspire-seven-strategies-for-ending-violence-against-children}{Publicación oficial}.
 \end{thebibliography}
 
-\FloatBarrier
+\clearpage
 \appendix
 \section{Diccionario mínimo y reglas de validación}\label{anexo:diccionario}
 Los nombres se limpian a minúsculas al leer los archivos. El cuadro conserva
