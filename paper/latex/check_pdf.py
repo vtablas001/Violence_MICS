@@ -21,7 +21,7 @@ if len(bibliography_pages) != 1:
     raise SystemExit("No se identifico un unico encabezado de Referencias.")
 reference_page, reference_text = bibliography_pages[0]
 prefix = re.split(r"(?m)^Referencias\s*$", reference_text, maxsplit=1)[0]
-if " ".join(prefix.split()) != "Infosegura Violencia y protección":
+if " ".join(prefix.split()) != "Infosegura":
     raise SystemExit("Las referencias deben comenzar en una pagina nueva.")
 if "Noviembre de 2021" not in cover:
     raise SystemExit("La portada no tiene la fecha actualizada a noviembre de 2021.")
