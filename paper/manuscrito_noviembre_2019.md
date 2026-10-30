@@ -4,8 +4,6 @@
 
 **Fecha editorial de referencia: noviembre de 2019**
 
-**Borrador para discusión académica**
-
 Autoría y afiliación por completar.
 
 ## Resumen
