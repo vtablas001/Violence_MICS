@@ -22,7 +22,7 @@ estimate_one <- function(design, variable, module, group = "Total", level = "Tot
     limite_superior_faltantes_pct = if (n) 100 * (sum(w[valid] * d[[variable]][valid]) + sum(w[!valid])) / denominator else NA_real_,
     gl_diseno = NA_real_, estado = "sin_observaciones")
   if (!observed) return(out)
-  vd <- design[valid, ]  # subset del diseno, nunca reconstruir la muestra.
+  vd <- design[valid, ]  # Subconjunto del diseño; nunca reconstruir la muestra.
   out$gl_diseno <- survey::degf(vd)
   if (observed < min_n) {out$estado <- "n_menor_25"; return(out)}
   est <- survey::svymean(stats::reformulate(variable), vd)

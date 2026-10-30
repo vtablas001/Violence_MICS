@@ -1,8 +1,8 @@
-# Reproduce only arithmetic on published aggregates. Base R; no SAV needed.
-# Run from this LaTeX directory: Rscript rebuild_analysis.R
-# Input transcriptions remain unchanged. Only named derived files are replaced.
+# Reproduce cálculos aritméticos sobre agregados publicados. Usa R base; no requiere archivos SAV.
+# Ejecutar desde esta carpeta LaTeX: Rscript rebuild_analysis.R
+# Conserva las transcripciones de entrada. Solo reemplaza los archivos derivados indicados.
 if (.Platform$OS.type == "windows") {
-  # Windows does not recognize the C.UTF-8 locale inherited in some terminals.
+  # Windows no reconoce la configuración regional C.UTF-8 heredada de algunas terminales.
   locale <- Sys.setlocale("LC_CTYPE", "English_United States.utf8")
   if (!nzchar(locale)) stop("Se requiere una configuracion regional UTF-8")
 }
@@ -34,7 +34,7 @@ final <- as.numeric(h[h$anio == 2020, fields])
 changes <- data.frame(indicador = fields, tasa2015 = initial, tasa2020 = final,
   cambio_tasa = final - initial, cambio_porcentual = 100 * (final / initial - 1))
 write(changes, "derivada_homicidios_cambios.csv")
-# Typeset table rows from full-precision calculations, display one decimal.
+# Genera filas de la tabla con la precisión disponible y muestra un decimal.
 labels <- c("Homicidios, total", "Homicidios, hombres", "Homicidios, mujeres",
             "Feminicidios")
 num <- function(x) chartr(".", ",", sprintf("%.1f", x))

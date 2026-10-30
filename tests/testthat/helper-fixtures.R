@@ -28,7 +28,7 @@ synthetic_data <- function() {
   wm$ma5 <- rep(c(NA, NA, 3, 2), length.out = nrow(wm))
   wm$ma9 <- rep(c(14, 18, NA, 16), length.out = nrow(wm))
   wm$wmweight <- rep(seq(0.6, 1.8, length.out = n), each = 2)
-  # Columnas existentes en wm original: no deben provocar sufijos en joins.
+  # Las columnas del archivo wm original no deben generar sufijos al unir tablas.
   wm$psu <- rep(hh$psu, each = 2); wm$stratum <- rep(hh$stratum, each = 2)
   for (v in paste0("dv1", letters[1:10]))
     wm[[v]] <- haven::labelled(sample(c(1, 2, 8), nrow(wm), TRUE), c(Si = 1, No = 2, NS = 8))
