@@ -2,16 +2,20 @@
 
 **[Leer el paper completo (PDF)](https://github.com/vtablas001/Violence_MICS/blob/main/paper/latex/main.pdf)**
 
-Análisis **descriptivo**, reproducible en R, de disciplina infantil, actitudes
+Estudio académico **descriptivo** de disciplina infantil, actitudes
 hacia la violencia contra la esposa y primera unión antes de los 15 y 18 años.
 La versión principal del artículo está disponible como
-[PDF de 27 páginas](paper/latex/main.pdf) y como
+[PDF de 26 páginas](paper/latex/main.pdf) y como
 [proyecto LaTeX editable](paper/latex/README.md), con trece figuras, dieciséis
 cuadros y seis anexos. Su fecha de referencia es **noviembre de 2021** y
 articula MICS con el análisis multidimensional de Infosegura. Se conserva el
 [borrador inicial en Markdown](paper/manuscrito_noviembre_2019.md).
 
 El máximo autorizado es **27 páginas**, incluidas referencias y anexos.
+
+El paper centra la pregunta de investigación, los hallazgos de MICS y su
+discusión con ENVCM e Infosegura. La implementación informática se documenta
+por separado en [reproducción técnica](docs/replicacion_tecnica.md).
 
 La ampliación añade seis figuras y análisis de coexistencia de prácticas,
 edad y riqueza, cohortes de primera unión, prioridades, percepción y

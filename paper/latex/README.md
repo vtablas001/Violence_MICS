@@ -13,23 +13,30 @@ acompañar a `main.tex` al compilar o importar el proyecto.
 La fecha editorial de referencia se actualizó a **noviembre de 2021**.
 Integra ENS MICS 2014 y las series de seguridad ciudadana de Infosegura (2021).
 
+El argumento principal es el estudio académico de prácticas disciplinarias,
+normas, uniones tempranas y protección familiar. El resumen, las preguntas,
+los resultados y las conclusiones se organizan alrededor de esa evidencia.
+La única mención de R como herramienta en el PDF está en la disponibilidad
+de materiales; comandos, pruebas y detalles de ejecución se conservan en
+[la documentación técnica complementaria](https://github.com/vtablas001/Violence_MICS/blob/main/docs/replicacion_tecnica.md).
+
 ## Contenido y evidencia
 
-- Trece figuras: arquitectura de archivos; disciplina nacional; coexistencia
+- Trece figuras: poblaciones y dimensiones de evidencia; disciplina nacional; coexistencia
   de prácticas; disciplina por edad y riqueza; diez escenarios de actitudes;
   primera unión; comparación de cohortes; violencia letal; victimización;
   prioridades del país; percepción por espacio; veinte cambios de privación;
   sensibilidad a faltantes.
-- Dieciséis cuadros, incluido el diccionario extenso y una plantilla de resultados
-  propios pendientes.
-- Seis anexos: diccionario, trazabilidad MICS, sensibilidad, replicación,
-  correcciones y procedencia de las series de Infosegura.
+- Dieciséis cuadros, incluido el diccionario extenso y una síntesis de
+  hallazgos e implicaciones de lectura.
+- Seis anexos: diccionario, trazabilidad MICS, sensibilidad, síntesis de evidencia,
+  criterios de comparabilidad y procedencia de las series de Infosegura.
 
 Los gráficos MICS presentan **cifras secundarias publicadas** del informe oficial:
 CP.5 pp.282-283, CP.10 p.296 y CP.7 p.288. Se verificaron las celdas visualmente.
 No son reestimaciones propias y no contienen IC inventados. La figura de
 sensibilidad es una identidad matemática bajo un ejemplo hipotético explícito.
-El diagrama de archivos es metodológico. La reestimación con microdatos sigue
+El diagrama inicial organiza poblaciones y dimensiones del estudio. La reestimación con microdatos sigue
 pendiente. No se usan las filas departamentales inconsistentes detectadas en
 CP.10 ni el texto introductorio incorrecto de CP.5.
 
@@ -111,7 +118,7 @@ Los paquetes de TeX se instalan mediante la distribución del usuario si faltan.
 
 ## Verificación de esta edición
 
-El PDF entregado tiene **27 páginas**, incluidas las referencias y los seis
+El PDF entregado tiene **26 páginas**, incluidas las referencias y los seis
 anexos. Esta ampliación se compiló con pdfLaTeX (MiKTeX 26.2).
 Se comprobaron referencias cruzadas, ausencia de cajas
 desbordadas en el registro y la representación de todas las páginas. La

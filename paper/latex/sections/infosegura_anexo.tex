@@ -1,8 +1,7 @@
 \section{Procedencia y reproducción de las series de seguridad}\label{anexo:infosegura}
 Las seis series de PNUD/Infosegura (2021) complementan MICS con indicadores
-de seguridad y condiciones de vida. Los CSV, el manifiesto de procedencia y
-el programa R permiten repetir los cálculos sobre agregados secundarios,
-sin registros individuales.
+de seguridad y condiciones de vida. Se conservan como agregados secundarios,
+con identificación de su procedencia y sin registros individuales.
 
 \begin{table}[htbp]
 \centering\small
@@ -20,14 +19,8 @@ Archivo, prefijo \var{infosegura_} & Dimensión & Alcance y restricción\\\midru
 
 El manifiesto \var{data/infosegura_fuente.json} registra procedencia,
 localizadores y versión. Los CSV conservan la precisión disponible y las
-figuras no imputan años ausentes. \var{rebuild_analysis.R} regenera los contrastes.
-
-\begin{samepage}
-Reproducción desde la carpeta del proyecto, con R base:
-\begin{verbatim}
-Rscript --vanilla rebuild_analysis.R
-\end{verbatim}
-\end{samepage}
+figuras no imputan años ausentes. Los materiales complementarios documentan
+los cálculos que sostienen los contrastes del artículo.
 Se mantienen las series disponibles en 2021 y se separan proyecciones de
 observaciones. Migración, revictimización y series mixtas se excluyen por
 bases insuficientemente verificadas. No se calculan IC propios sobre estos
