@@ -1,37 +1,34 @@
-\section{Extracción, procedencia y límites de Infosegura}\label{anexo:infosegura}
-La presentación suministrada se identifica como versión 3.0 de DATACCIÓN
-2021 y contiene 14 diapositivas. El script \var{extract_infosegura.py} lee
-las cachés XML de gráficos nativos, respetando el índice de cada observación,
-y genera seis CSV y un manifiesto JSON. No actualiza vínculos externos, no
-abre los libros Excel privados y no modifica el archivo original.
+\section{Procedencia y reproducción de las series de seguridad}\label{anexo:infosegura}
+Las seis series de PNUD/Infosegura (2021) complementan MICS con indicadores
+de seguridad y condiciones de vida. Los CSV, el manifiesto de procedencia y
+el programa R permiten repetir los cálculos sobre agregados secundarios,
+sin registros individuales.
 
 \begin{table}[htbp]
 \centering\small
-\caption{Trazabilidad de los agregados de Infosegura}\label{tab:traza_infosegura}
-\begin{tabularx}{\textwidth}{@{}p{3.5cm}p{1.4cm}Y@{}}\toprule
-Archivo, prefijo \var{infosegura_} & Lámina & Alcance y restricción\\\midrule
-\var{homicidios.csv} & 4, 5 & Gráficos 3 y 5. Tasas por grupo; 2021 es proyección.\\
-\var{victimizacion.csv} & 10 & Gráficos 16-18. Delincuencia en doce meses; universo etario no explicitado.\\
-\var{preocupaciones.csv} & 7 & Gráfico 11. Se conserva vacío COVID-19 antes de 2021; no se imputa cero.\\
-\var{denuncias.csv} & 5 & Gráfico 4. Promedios mensuales; corte 2021 no documentado en la lámina.\\
-\var{privaciones.csv} & 8 & Gráfico 12. Cambios 2019-2020 en puntos porcentuales.\\
-\var{percepcion.csv} & 12 & Gráfico 21. Transporte y comunidad; no confundir percepción con uso de espacios.\\\bottomrule
+\caption{Series de seguridad: archivos, dimensiones y restricciones}\label{tab:traza_infosegura}
+\begin{tabularx}{\textwidth}{@{}p{3.5cm}p{2.5cm}Y@{}}\toprule
+Archivo, prefijo \var{infosegura_} & Dimensión & Alcance y restricción\\\midrule
+\var{homicidios.csv} & Violencia letal & Tasas por población de referencia; 2021 es proyección.\\
+\var{victimizacion.csv} & Experiencia delictiva & Delincuencia en doce meses; universo etario no explicitado.\\
+\var{preocupaciones.csv} & Opinión & COVID-19 solo consta en 2021; antes permanece vacío, no cero.\\
+\var{denuncias.csv} & Demanda institucional & Promedios mensuales; corte de 2021 no precisado.\\
+\var{privaciones.csv} & Condiciones de vida & Cambios 2019--2020 en puntos porcentuales, no niveles.\\
+\var{percepcion.csv} & Seguridad percibida & Transporte y comunidad; distinto de uso de espacios.\\\bottomrule
 \end{tabularx}
 \end{table}
 
-La huella SHA256 y los localizadores constan en
-\var{data/infosegura_fuente.json}. Los CSV preservan la precisión original;
-las figuras redondean, conectan observaciones y no imputan años ausentes.
+El manifiesto \var{data/infosegura_fuente.json} registra procedencia,
+localizadores y versión. Los CSV conservan la precisión disponible y las
+figuras no imputan años ausentes. \var{rebuild_analysis.R} regenera los contrastes.
 
 \begin{samepage}
-Para repetir la extracción con una copia autorizada de la misma presentación:
+Reproducción desde la carpeta del proyecto, con R base:
 \begin{verbatim}
-python extract_infosegura.py "ruta/presentacion.pptx" \
-  --output-dir data
+Rscript --vanilla rebuild_analysis.R
 \end{verbatim}
 \end{samepage}
-La extracción usa Python estándar y no redistribuye el PPTX. Se conserva su
-versión de 2021, sin revisiones posteriores. Se excluyen migración,
-revictimización y la serie mixta de la lámina 3 por bases ambiguas o series
-auxiliares. No se certifican registros primarios o comparabilidad de
-ponderadores entre rondas, ni se calculan IC propios.
+Se mantienen las series disponibles en 2021 y se separan proyecciones de
+observaciones. Migración, revictimización y series mixtas se excluyen por
+bases insuficientemente verificadas. No se calculan IC propios sobre estos
+agregados ni se certifica comparabilidad de ponderadores entre rondas.

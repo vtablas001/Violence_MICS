@@ -20,8 +20,8 @@ violencia letal entre 2015 y 2020. Los cálculos se regeneran con R base desde
 la carpeta `paper/latex`: `Rscript --vanilla rebuild_analysis.R`.
 
 Los gráficos empíricos del artículo LaTeX presentan cifras **secundarias del
-informe MICS y de la presentación Infosegura**, cotejadas con sus tablas,
-páginas o diapositivas. No son reestimaciones
+informe MICS y de las series de Infosegura**, cotejadas con sus tablas
+y localizadores de origen. No son reestimaciones
 propias. El gráfico de sensibilidad es una ilustración matemática identificada.
 
 **Estado:** código probado con archivos SPSS artificiales. No se dispuso de los

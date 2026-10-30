@@ -11,7 +11,7 @@ usuario, conservado sin modificaciones en `images/`. Esta carpeta debe
 acompañar a `main.tex` al compilar o importar el proyecto.
 
 La fecha editorial de referencia se actualizó a **noviembre de 2021**.
-Integra ENS MICS 2014 y la presentación Infosegura DATACCIÓN 2021 suministrada.
+Integra ENS MICS 2014 y las series de seguridad ciudadana de Infosegura (2021).
 
 ## Contenido y evidencia
 
@@ -23,7 +23,7 @@ Integra ENS MICS 2014 y la presentación Infosegura DATACCIÓN 2021 suministrada
 - Quince cuadros, incluido el diccionario extenso y una plantilla de resultados
   propios pendientes.
 - Seis anexos: diccionario, trazabilidad MICS, sensibilidad, replicación,
-  correcciones y extracción de Infosegura.
+  correcciones y procedencia de las series de Infosegura.
 
 Los gráficos MICS presentan **cifras secundarias publicadas** del informe oficial:
 CP.5 pp.282-283, CP.10 p.296 y CP.7 p.288. Se verificaron las celdas visualmente.
@@ -43,23 +43,14 @@ con violencia letal, victimización por delincuencia y condiciones materiales.
 Las series de Infosegura son agregados secundarios, no registros vinculados a
 las personas de MICS. Las figuras preservan la proyección de homicidios de 2021
 con trazo discontinuo y no la reemplazan con cifras anuales publicadas después.
-Las denuncias son promedios mensuales con corte 2021 no precisado en la lámina;
+Las denuncias son promedios mensuales con corte 2021 no precisado en la fuente;
 la variación de privación por desempleo está en puntos porcentuales.
 
-Los seis CSV `data/infosegura_*.csv` proceden de las cachés de gráficos nativos
-del PPTX y se cotejaron visualmente en PowerPoint. El manifiesto
-`data/infosegura_fuente.json` registra huella del archivo, gráficos y láminas.
-El libro Excel original no está incluido en la presentación. No se abren
-sus enlaces privados, no se publica la presentación completa y no se imputan
-denominadores que las láminas no documentan.
-
-Para regenerar los agregados con una copia autorizada del archivo:
-
-```sh
-python extract_infosegura.py "ruta/presentacion.pptx" --output-dir data
-```
-
-La extracción requiere solo la biblioteca estándar de Python. El repositorio
+Los seis CSV `data/infosegura_*.csv` contienen los agregados secundarios
+utilizados. `data/infosegura_fuente.json` conserva su procedencia, localizadores
+y control de versión. El registro técnico completo de obtención se mantiene
+en [la documentación del repositorio](https://github.com/vtablas001/Violence_MICS/blob/main/docs/infosegura.md).
+No se imputan denominadores que la fuente no documenta. El repositorio
 incluye `scripts/run_infosegura.R` para verificar los agregados y exportar
 contrastes descriptivos sin mezclar registros individuales de MICS.
 
